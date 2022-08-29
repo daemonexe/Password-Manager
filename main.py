@@ -8,10 +8,6 @@ from tkinter import filedialog
 import shutil
 from tkinter import messagebox
 
-# Import ended
-
-# Removed the random function 
-
 db = 'sign_up.db'
 
 # Creaing the function
@@ -62,6 +58,7 @@ new_copy_image = PhotoImage(file = 'Manager/new copy image.png')
 check_button_disable_img = PhotoImage(file = 'Manager/clicker_disabled.png')
 check_button_enabled_img = PhotoImage(file = 'Manager/clicker_enabled.png')
 generate_button_image = PhotoImage(file = 'Manager/generate_button.png')
+clear_fields_button_image = PhotoImage(file = 'Manager/clear_Feild_img.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -179,7 +176,7 @@ def login_button_pressed(e):
         Style = ttk.Style()
         Style.theme_use('default')
         Style.configure("Treeview", background="white",
-                foreground="black",rowheight = 45,bd= 0,highlightcolor = 'white',font = ('Helvetica',15))
+        foreground="black",rowheight = 45,bd= 0,highlightcolor = 'white',font = ('Helvetica',15))
 
         Style.configure("Treeview.Heading", background="#171a1f", foreground="white",font = ('arial',14))
         Style.map("Treeview",background = [('selected','#ECECEC')],foreground = [('selected','#753de1')])
@@ -220,7 +217,6 @@ def login_button_pressed(e):
         generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#111418',bd = 0,fg = 'white',width = 28,font = ('arial',12))
 
 
-
         # Griding the widgets
         button1 = Label(password_manager_page,bd= 0,image = new_button)
         button2 = Label(password_manager_page,bd= 0,image = update_button)
@@ -230,6 +226,7 @@ def login_button_pressed(e):
         button6 = Label(password_manager_page,bd= 0,image = reset_button)
         button7 = Label(password_manager_page,bd= 0,image = exit_button)
         button8 = Label(password_manager_page,bd= 0,image = add_button_new)
+        button9 = Label(password_manager_page,bd= 0,image = clear_fields_button_image)
         copy1 = Label(password_manager_page,bd= 0,image = new_copy_image)
         copy2 = Label(password_manager_page,bd= 0,image = new_copy_image)
         copy3 = Label(password_manager_page,bd= 0,image = new_copy_image)
@@ -345,21 +342,17 @@ def login_button_pressed(e):
                 total_clicks3 = 0
 
         def generate_random_password(e):
+
             DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-            LOCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-                                 'i', 'j', 'k', 'm', 'n', 'o', 'p', 'q',
-                                 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
-                                 'z']
 
-            UPCASE_CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-                                 'I', 'J', 'K', 'M', 'N', 'O', 'p', 'Q',
-                                 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-                                 'Z']
+            LOCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i', 'j', 'k', 'm', 'n', 'o', 'p', 'q','r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-            SYMBOLS = ['@', '#', '$', '%', '=', ':',
-                       '?', '.', '/', '|', '~', '>',
-                       '*', '(', ')', '<']
+            UPCASE_CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I', 'J', 'K', 'M', 'N', 'O', 'p', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+            SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '|', '~', '>','*', '(', ')', '<']
+
             print(check_button1['image'])
+
             # Enabled 28 Disabled 27
             # Possible combinations LU NU US LS LN SL
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
@@ -606,10 +599,6 @@ def login_button_pressed(e):
 
                 generated_password_Filed.delete(0,END)
                 generated_password_Filed.insert(0,generated_password)
-
-
-
-
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
                 a1 = random.choice(LOCASE_CHARACTERS)
                 a2 = random.choice(SYMBOLS)
@@ -702,7 +691,6 @@ def login_button_pressed(e):
 
                     generated_password_Filed.delete(0,END)
                     generated_password_Filed.insert(0,generated_password)
-
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
                 a1 = random.choice(UPCASE_CHARACTERS)
                 a2 = random.choice(SYMBOLS)
@@ -865,6 +853,11 @@ def login_button_pressed(e):
             new_directory = file.name  # dowload db
             shutil.copy(src = new_directory,dst = old_directory)
             print(new_directory)
+
+            # restart functionality under work
+            # new_window.destroy()
+            # os.startfile("main.py")
+
             messagebox.showinfo(" < Import Successful > ",'Database imported successfully , Restart the software to see imported data...')
             new_window.destroy()
 
@@ -923,7 +916,8 @@ def login_button_pressed(e):
         entr1.grid(row = 74,column = 1,columnspan = 68,rowspan =300)
         entr2.grid(row = 76,column = 1,columnspan = 68,rowspan =60)
         entr3.grid(row = 77,column = 1,columnspan = 68,rowspan =500)
-        button8.grid(row = 81,column = 1,columnspan = 68,rowspan =10)
+        button8.grid(row = 81,column = 1,columnspan = 60,rowspan =10)
+        button9.grid(row = 81,column = 1,columnspan = 80,rowspan =10)
         copy1.grid(row = 74,column = 1,columnspan = 125,rowspan =800)
         copy2.grid(row = 76,column = 1,columnspan = 125,rowspan =800)
         copy3.grid(row = 77,column = 1,columnspan = 125,rowspan =800)
