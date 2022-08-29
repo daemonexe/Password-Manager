@@ -10,6 +10,10 @@ from tkinter import messagebox
 
 # Import ended
 
+def random_func():
+
+    print('hello')
+
 db = 'sign_up.db'
 
 # Creaing the function
@@ -602,6 +606,10 @@ def login_button_pressed(e):
 
                 generated_password_Filed.delete(0,END)
                 generated_password_Filed.insert(0,generated_password)
+
+
+
+
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
                 a1 = random.choice(LOCASE_CHARACTERS)
                 a2 = random.choice(SYMBOLS)
@@ -671,7 +679,7 @@ def login_button_pressed(e):
 
                 if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28' and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
 
-                    generated_password_Filed.delete(0,END)
+                    generated_password_Filed.delete(1,END)
                     generated_password_Filed.insert(0,generated_password)
                     a1 = random.choice(UPCASE_CHARACTERS)
                     a2 = random.choice(DIGITS)
