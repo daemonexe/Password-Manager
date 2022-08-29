@@ -10,9 +10,7 @@ from tkinter import messagebox
 
 # Import ended
 
-def random_func():
-
-    print('hello')
+# Removed the random function 
 
 db = 'sign_up.db'
 
@@ -141,6 +139,8 @@ def login_button_pressed(e):
     if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
         login_bag.config(image = login_succesful)
         window.withdraw()
+
+
 
         new_window = Toplevel()
         password_manager_page = Frame(new_window)
