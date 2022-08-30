@@ -9,10 +9,15 @@ import shutil
 from tkinter import messagebox
 import string
 
-# Creaing the function
+# variables
 window = Tk()
 iid_val = 0
 added_sno = []
+invalid_counter = 0
+total_clicks = 0
+total_clicks1 = 0
+total_clicks2 = 0
+total_clicks3 = 0
 
 # Creating all pages in the app
 sign_up_page = Frame(window)
@@ -74,18 +79,14 @@ y_cord = (screen_height / 2.5) - (height_of_win / 2.5)
 window.geometry('%dx%d+%d+%d' % (width_of_win, height_of_win, x_cord, y_cord))
 window.overrideredirect(True)
 
-# Creating the widgets :
+# Widgets
 baground = Label(sign_up_page,image = sign_up_img,bg = 'black')
 username_field = Entry(sign_up_page,width=17, bd=0, font=('Arial Bold', 21), bg='#ebebeb')
 password_field1 = Entry(sign_up_page,width=17, bd=0, font=('Arial', 21), bg='#ebebeb')
 password_field2 = Entry(sign_up_page,width=17, bd=0, font=('Arial', 21), bg='#ebebeb')
 exit_button_1 = Button(sign_up_page,text = 'X',width = 3,bd = 0,font = ('arial bold',10),bg = 'red',fg = 'white')
 
-invalid_counter = 0
-total_clicks = 0
-total_clicks1 = 0
-total_clicks2 = 0
-total_clicks3 = 0
+
 
 def button_Click(e):
     global invalid_counter
@@ -111,7 +112,7 @@ def button_Click(e):
 
             conn.commit()
             conn.close()
-            print("insertion succesfull ")
+
         else:
             baground.config(image=less_characters_sign_up)
 
@@ -136,8 +137,6 @@ def login_button_pressed(e):
         login_bag.config(image = login_succesful)
         window.withdraw()
 
-
-
         new_window = Toplevel()
         password_manager_page = Frame(new_window)
         password_generator_page = Frame(new_window)
@@ -160,9 +159,9 @@ def login_button_pressed(e):
         # Centering the window
         new_window.resizable(False,False)
         new_window.geometry('%dx%d+%d+%d' % (width_of_win, height_of_win, x_cord, y_cord))
+        new_window.iconbitmap('icon.ico')
 
-
-        # Creating the widgets
+        # widgets
         change_page(password_manager_page)
         background = Label(password_manager_page,image = manager_baground,bd =0)
 
@@ -170,24 +169,22 @@ def login_button_pressed(e):
         paz_tree = ttk.Treeview(password_manager_page)
         paz_tree['column'] = ['sno','website_name','username','password']
 
-        # Style
-
+        # styling the elements
         Style = ttk.Style()
         Style.theme_use('default')
         Style.configure("Treeview", background="white",
         foreground="black",rowheight = 45,bd= 0,highlightcolor = 'white',font = ('Helvetica',15))
-
         Style.configure("Treeview.Heading", background="#171a1f", foreground="white",font = ('arial',14))
         Style.map("Treeview",background = [('selected','#ECECEC')],foreground = [('selected','#753de1')])
 
-        #Customising rows
+        #styling rows
         paz_tree.column('#0',width = 0,minwidth = 0)
         paz_tree.column('sno',width = 200,minwidth = 40,anchor = CENTER)
         paz_tree.column('website_name',width = 240,minwidth = 40,anchor = CENTER)
         paz_tree.column('username',width = 260,minwidth = 40,anchor = CENTER)
         paz_tree.column('password',width = 310,minwidth = 40,anchor = CENTER)
 
-        # Creaitng headings
+        # style headings
         paz_tree.heading("sno",text = 'Sno')
         paz_tree.heading("website_name",text = 'Website')
         paz_tree.heading("username",text = 'Username')
@@ -195,8 +192,6 @@ def login_button_pressed(e):
         new_window.title('Password Manager - 2.0.2')
         conn = sqlite3.connect('password_data.db')
         c = conn.cursor()
-
-        new_window.iconbitmap('icon.ico')
 
         c.execute("""CREATE TABLE IF NOT EXISTS passwords (
         sno TEXT,
@@ -209,12 +204,12 @@ def login_button_pressed(e):
         rows = c.fetchall()
         print('rows are ',rows)
 
+        # widgets
         entr = Entry(password_manager_page,width = 2,font = ('arial',14),bg = '#111418',bd = 0,fg = 'white')
         entr1 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
         entr2 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
         entr3 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
         generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#111418',bd = 0,fg = 'white',width = 28,font = ('arial',12))
-
 
         # Griding the widgets
         button1 = Label(password_manager_page,bd= 0,image = new_button)
@@ -265,6 +260,7 @@ def login_button_pressed(e):
         def on_leave_export(e):
             button5.config(image = export_button)
 
+        # copy to clipboard
         def copy_wbsite_name_to_clip_board(e):
             password_gen = entr1.get()
             password_manager_page.clipboard_clear()
@@ -283,6 +279,7 @@ def login_button_pressed(e):
             password_manager_page.clipboard_append(password_gen)
             password_manager_page.update()
 
+        # adding function to buttons
         button7.bind("<Enter>",on_hover_exit)
         button7.bind("<Leave>",on_leave_exit)
         button6.bind("<Enter>",on_hover_reset)
@@ -301,8 +298,6 @@ def login_button_pressed(e):
         copy2.bind("<Button>",copy_username_name_to_clip_board)
         copy3.bind("<Button>",copy_password_name_to_clip_board)
 
-        # Enable clicking options (Function)
-        # HELLO THIS A NEW ADDED CODE PLEASE CHEK THIS OUT
         def button_clicked(e):
             global total_clicks
             total_clicks += 2
@@ -346,7 +341,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase + string.ascii_uppercase + string.digits + "!@#$%^&*()")
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -363,10 +357,8 @@ def login_button_pressed(e):
 
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
 
-                # uppercase characters
                 characters = list(string.ascii_uppercase)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -382,11 +374,8 @@ def login_button_pressed(e):
 
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
 
-                # only digits
-                # uppercase characters
                 characters = list(string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -404,7 +393,6 @@ def login_button_pressed(e):
 
                 characters = list('!@#$%^&*()')
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -421,10 +409,8 @@ def login_button_pressed(e):
 
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
 
-                # only lowercase characters
                 characters = list(string.ascii_lowercase)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -444,7 +430,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase + '!@#$%^&*()')
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -463,7 +448,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()')
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -481,7 +465,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_uppercase + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -499,7 +482,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_uppercase + string.ascii_lowercase)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -518,7 +500,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -536,7 +517,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -554,7 +534,6 @@ def login_button_pressed(e):
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
                 characters = list(string.ascii_lowercase + '!@#$%^&*()' + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -573,7 +552,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -592,7 +570,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -611,7 +588,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + string.digits)
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -630,7 +606,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()')
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -648,7 +623,6 @@ def login_button_pressed(e):
 
                 characters = list(string.ascii_lowercase  + string.digits + '!@#$%^&*()')
 
-                ## shuffling the characters
                 random.shuffle(characters)
                 password = []
 
@@ -662,13 +636,14 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
+        # adding elements to the treeview $ SQL
         def adding_data(e):
             global iid_val
             global added_sno
             conn = sqlite3.connect('password_data.db')
             c = conn.cursor()
 
+            # getting the input
             sno_inp = entr.get()
             website_name = entr1.get()
             username_inp = entr2.get()
@@ -686,7 +661,7 @@ def login_button_pressed(e):
             c.execute(f"INSERT INTO passwords VALUES ('{sno_inp}','{website_name}','{username_inp}','{password_inp}')")
             iid_val += 1
 
-            # completing the connection between front-end and back-end
+            # closing the connection between front-end and back-end
             conn.commit()
             conn.close()
 
@@ -707,7 +682,6 @@ def login_button_pressed(e):
 
             c.execute(f"""UPDATE passwords SET website_name = '{website_name}',sno = '{sno}',username = '{username}',password = '{passwords}'
                 WHERE sno = '{sno_old}'
-
             """)
 
             paz_tree.item(selected,text = '',values = (sno,website_name,username,passwords))
@@ -729,7 +703,7 @@ def login_button_pressed(e):
             c.execute("DELETE FROM passwords where sno = ?", (sno,))
             paz_tree.delete(x)
 
-            # Closing the connection
+            # closing the connection between front-end and back-end
             conn.commit()
             conn.close()
 
@@ -741,13 +715,13 @@ def login_button_pressed(e):
             username = final_values[2]
             password = final_values[3]
 
-            # Flusing
+            # removing existing data
             entr.delete(0,END)
             entr1.delete(0,END)
             entr2.delete(0,END)
             entr3.delete(0,END)
 
-            # Inserting
+            # adding new data
             entr.insert(0,sno)
             entr1.insert(0,website_name)
             entr2.insert(0,username)
@@ -759,10 +733,11 @@ def login_button_pressed(e):
             entr2.delete(0,END)
             entr3.delete(0,END)
 
+        # Exit
         def exit_application(e):
             new_window.destroy()
 
-        # Move Data outside
+        # export files to computer
         def export_Files(e):
             files = [('Database File [Highly Encrypted]', '*.db')]
             file = filedialog.asksaveasfile(filetypes=files,initialfile = 'password_data', defaultextension=files)
@@ -778,25 +753,17 @@ def login_button_pressed(e):
             old_directory = os.getcwd()
             new_directory = file.name # gets the file path
 
-
-
-            # Get file name :
-
             shutil.copy(src = new_directory,dst = old_directory)
-            # delete the already existing file :
+            # remove the old file to avoid duplication
             os.remove('password_data.db')
-            file_name = os.path.basename(new_directory)
 
+            file_name = os.path.basename(new_directory)
             new_window.destroy()
             os.startfile("main.pyw")
-
-            print('file removed ')
 
             # Rename the imported file to password_data.db
             os.rename(file_name, 'password_data.db')
 
-            # messagebox.showinfo(" < Import Successful > ",'Database imported successfully , Restart the software to see imported data...')
-            # new_window.destroy()
 
         def clear_data(e):
             entr.delete(0,END)
@@ -806,11 +773,13 @@ def login_button_pressed(e):
 
         # Delete data from squlite3 and Treeview
         def delete_file(e):
-            file = os.getcwd() + '\password_data.db'
-            os.remove(file)
-            messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
-            new_window.destroy()
+            pass # under work
+            # file = os.getcwd() + '\password_data.db'
+            # os.remove(file)
+            # messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
+            # new_window.destroy()
 
+        # adding functions to remaing buttons
         button7.bind("<Button>",exit_application)
         paz_tree.bind('<Button-1>', selectItem)
         button8.bind("<Button>",clear_Fields)
@@ -836,9 +805,9 @@ def login_button_pressed(e):
         c.execute("SELECT * FROM passwords")
         rows = c.fetchall()
 
-        # Squlite3 - Treeview
+        # thsi code converts SQL data and shows into treeview
         for row in rows:
-            print(row)  # it print all records in the database
+            print(row)
             paz_tree.insert("", END, values=row)
 
         c.execute("""CREATE TABLE IF NOT EXISTS passwords (
@@ -847,7 +816,7 @@ def login_button_pressed(e):
         conn.commit()
         conn.close()
 
-        # Gridded widgets
+        # gridding the widgets
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
         button1.grid(row = 70,column = 3)
         button2.grid(row = 72,column = 3)
@@ -875,7 +844,7 @@ def login_button_pressed(e):
 
         new_window.mainloop()
 
-    # If password is wrong
+    # condition if password was wrong
     else:
         login_bag.config(image = login_incorrect)
         invalid_counter +=  1
