@@ -8,8 +8,6 @@ from tkinter import filedialog
 import shutil
 from tkinter import messagebox
 
-db = 'sign_up.db'
-
 # Creaing the function
 window = Tk()
 iid_val = 0
@@ -691,6 +689,8 @@ def login_button_pressed(e):
 
                     generated_password_Filed.delete(0,END)
                     generated_password_Filed.insert(0,generated_password)
+
+
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
                 a1 = random.choice(UPCASE_CHARACTERS)
                 a2 = random.choice(SYMBOLS)
@@ -850,16 +850,33 @@ def login_button_pressed(e):
             files = [('Database Files', '*.db')]
             file = filedialog.askopenfile(filetypes=files,initialfile = 'red', defaultextension=files)
             old_directory = os.getcwd()
-            new_directory = file.name  # dowload db
+            new_directory = file.name # gets the file path
+
+
+
+            # Get file name :
+
             shutil.copy(src = new_directory,dst = old_directory)
-            print(new_directory)
+            # delete the already existing file :
+            os.remove('password_data.db')
+            file_name = os.path.basename(new_directory)
 
-            # restart functionality under work
-            # new_window.destroy()
-            # os.startfile("main.py")
-
-            messagebox.showinfo(" < Import Successful > ",'Database imported successfully , Restart the software to see imported data...')
             new_window.destroy()
+            os.startfile("main.pyw")
+
+            print('file removed ')
+
+            # Rename the imported file to password_data.db
+            os.rename(file_name, 'password_data.db')
+
+            # messagebox.showinfo(" < Import Successful > ",'Database imported successfully , Restart the software to see imported data...')
+            # new_window.destroy()
+
+        def clear_data(e):
+            entr.delete(0,END)
+            entr1.delete(0,END)
+            entr2.delete(0,END)
+            entr3.delete(0,END)
 
         # Delete data from squlite3 and Treeview
         def delete_file(e):
@@ -883,6 +900,8 @@ def login_button_pressed(e):
         check_button2.bind("<Button>",button_clicked1)
         check_button4.bind("<Button>",button_clicked2)
         check_button3.bind("<Button>",button_clicked3)
+        button8.bind("<Button>",adding_data)
+        button9.bind("<Button>", clear_data)
 
         # Printing data on rows and columns
         conn = sqlite3.connect("password_data.db")
@@ -973,8 +992,8 @@ log_in_button.bind('<Button>',login_button_pressed)
 sign_up_button.bind("<Button>",button_Click)
 exit_button_2.bind("<Button>",exit_applicaation)
 
-# Check if the user already signed in
-if os.path.isfile(db):
+# Check weather the user already has an account
+if os.path.isfile('sign_up.db'):
     switch_page(login_page)
 else:
     switch_page(sign_up_page)
