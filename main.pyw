@@ -7,6 +7,7 @@ from tkinter import ttk
 from tkinter import filedialog
 import shutil
 from tkinter import messagebox
+import string
 
 # Creaing the function
 window = Tk()
@@ -341,400 +342,326 @@ def login_button_pressed(e):
 
         def generate_random_password(e):
 
-            DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-            LOCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i', 'j', 'k', 'm', 'n', 'o', 'p', 'q','r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-            UPCASE_CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I', 'J', 'K', 'M', 'N', 'O', 'p', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
-            SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '|', '~', '>','*', '(', ')', '<']
-
-            print(check_button1['image'])
-
-            # Enabled 28 Disabled 27
-            # Possible combinations LU NU US LS LN SL
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
-                a1 = random.choice(DIGITS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(UPCASE_CHARACTERS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(LOCASE_CHARACTERS)
-                a10 = random.choice(DIGITS)
-                a11 = random.choice(DIGITS)
-                a12 = random.choice(SYMBOLS)
-                a13 = random.choice(LOCASE_CHARACTERS)
-                a14 = random.choice(SYMBOLS)
-                a15 = random.choice(LOCASE_CHARACTERS)
-                a16 = random.choice(DIGITS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_lowercase + string.ascii_uppercase + string.digits + "!@#$%^&*()")
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(UPCASE_CHARACTERS)
-                a3 = random.choice(UPCASE_CHARACTERS)
-                a4 = random.choice(UPCASE_CHARACTERS)
-                a5 = random.choice(UPCASE_CHARACTERS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(UPCASE_CHARACTERS)
-                a9 = random.choice(UPCASE_CHARACTERS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(UPCASE_CHARACTERS)
-                a12 = random.choice(UPCASE_CHARACTERS)
-                a13 = random.choice(UPCASE_CHARACTERS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(UPCASE_CHARACTERS)
-                a16 = random.choice(UPCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                # uppercase characters
+                characters = list(string.ascii_uppercase)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
-                a1 = random.choice(DIGITS)
-                a2 = random.choice(DIGITS)
-                a3 = random.choice(DIGITS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(DIGITS)
-                a6 = random.choice(DIGITS)
-                a7 = random.choice(DIGITS)
-                a8 = random.choice(DIGITS)
-                a9 = random.choice(DIGITS)
-                a10 = random.choice(DIGITS)
-                a11 = random.choice(DIGITS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(DIGITS)
-                a14 = random.choice(DIGITS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(DIGITS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                # only digits
+                # uppercase characters
+                characters = list(string.digits)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27':
-                a1 = random.choice(SYMBOLS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(SYMBOLS)
-                a4 = random.choice(SYMBOLS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(SYMBOLS)
-                a7 = random.choice(SYMBOLS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(SYMBOLS)
-                a10 = random.choice(SYMBOLS)
-                a11 = random.choice(SYMBOLS)
-                a12 = random.choice(SYMBOLS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(SYMBOLS)
-                a15 = random.choice(SYMBOLS)
-                a16 = random.choice(SYMBOLS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list('!@#$%^&*()')
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
-                a1 = random.choice(LOCASE_CHARACTERS)
-                a2 = random.choice(LOCASE_CHARACTERS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(LOCASE_CHARACTERS)
-                a5 = random.choice(LOCASE_CHARACTERS)
-                a6 = random.choice(LOCASE_CHARACTERS)
-                a7 = random.choice(LOCASE_CHARACTERS)
-                a8 = random.choice(LOCASE_CHARACTERS)
-                a9 = random.choice(LOCASE_CHARACTERS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(LOCASE_CHARACTERS)
-                a13 = random.choice(LOCASE_CHARACTERS)
-                a14 = random.choice(LOCASE_CHARACTERS)
-                a15 = random.choice(LOCASE_CHARACTERS)
-                a16 = random.choice(LOCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                # only lowercase characters
+                characters = list(string.ascii_lowercase)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
 
-            # 2 Selected at a time 1U,2N,3S,4L
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
 
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
-                a1 = random.choice(LOCASE_CHARACTERS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(SYMBOLS)
-                a4 = random.choice(LOCASE_CHARACTERS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(LOCASE_CHARACTERS)
-                a7 = random.choice(LOCASE_CHARACTERS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(LOCASE_CHARACTERS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(SYMBOLS)
-                a12 = random.choice(LOCASE_CHARACTERS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(LOCASE_CHARACTERS)
-                a15 = random.choice(SYMBOLS)
-                a16 = random.choice(SYMBOLS)
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                characters = list(string.ascii_lowercase + '!@#$%^&*()')
+
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(UPCASE_CHARACTERS)
-                a3 = random.choice(SYMBOLS)
-                a4 = random.choice(UPCASE_CHARACTERS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(UPCASE_CHARACTERS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(SYMBOLS)
-                a12 = random.choice(UPCASE_CHARACTERS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(SYMBOLS)
-                a16 = random.choice(SYMBOLS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_uppercase + '!@#$%^&*()')
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(UPCASE_CHARACTERS)
-                a3 = random.choice(DIGITS)
-                a4 = random.choice(UPCASE_CHARACTERS)
-                a5 = random.choice(DIGITS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(DIGITS)
-                a9 = random.choice(UPCASE_CHARACTERS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(DIGITS)
-                a12 = random.choice(UPCASE_CHARACTERS)
-                a13 = random.choice(DIGITS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(DIGITS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_uppercase + string.digits)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(UPCASE_CHARACTERS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(UPCASE_CHARACTERS)
-                a5 = random.choice(LOCASE_CHARACTERS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(LOCASE_CHARACTERS)
-                a9 = random.choice(UPCASE_CHARACTERS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(UPCASE_CHARACTERS)
-                a13 = random.choice(LOCASE_CHARACTERS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(LOCASE_CHARACTERS)
-                a16 = random.choice(LOCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_uppercase + string.ascii_lowercase)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(DIGITS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(LOCASE_CHARACTERS)
-                a6 = random.choice(DIGITS)
-                a7 = random.choice(UPCASE_CHARACTERS)
-                a8 = random.choice(LOCASE_CHARACTERS)
-                a9 = random.choice(DIGITS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(DIGITS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(LOCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_lowercase + string.digits)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(UPCASE_CHARACTERS)
-                a3 = random.choice(DIGITS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(DIGITS)
-                a7 = random.choice(SYMBOLS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(DIGITS)
-                a10 = random.choice(SYMBOLS)
-                a11 = random.choice(SYMBOLS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(DIGITS)
-                a14 = random.choice(SYMBOLS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(SYMBOLS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
-                a1 = random.choice(LOCASE_CHARACTERS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(LOCASE_CHARACTERS)
-                a6 = random.choice(DIGITS)
-                a7 = random.choice(LOCASE_CHARACTERS)
-                a8 = random.choice(LOCASE_CHARACTERS)
-                a9 = random.choice(DIGITS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(DIGITS)
-                a14 = random.choice(LOCASE_CHARACTERS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(LOCASE_CHARACTERS)
+                characters = list(string.ascii_lowercase + '!@#$%^&*()' + string.digits)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                for i in range(17):
+                    password.append(random.choice(characters))
 
-            # Single empty field option :
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
 
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(SYMBOLS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(UPCASE_CHARACTERS)
-                a6 = random.choice(SYMBOLS)
-                a7 = random.choice(DIGITS)
-                a8 = random.choice(UPCASE_CHARACTERS)
-                a9 = random.choice(SYMBOLS)
-                a10 = random.choice(UPCASE_CHARACTERS)
-                a11 = random.choice(SYMBOLS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(UPCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
-                a1 = random.choice(LOCASE_CHARACTERS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(SYMBOLS)
-                a4 = random.choice(DIGITS)
-                a5 = random.choice(UPCASE_CHARACTERS)
-                a6 = random.choice(UPCASE_CHARACTERS)
-                a7 = random.choice(LOCASE_CHARACTERS)
-                a8 = random.choice(UPCASE_CHARACTERS)
-                a9 = random.choice(SYMBOLS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(DIGITS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(DIGITS)
-                a16 = random.choice(LOCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
-                if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28' and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
 
-                    generated_password_Filed.delete(1,END)
-                    generated_password_Filed.insert(0,generated_password)
-                    a1 = random.choice(UPCASE_CHARACTERS)
-                    a2 = random.choice(DIGITS)
-                    a3 = random.choice(LOCASE_CHARACTERS)
-                    a4 = random.choice(UPCASE_CHARACTERS)
-                    a5 = random.choice(UPCASE_CHARACTERS)
-                    a6 = random.choice(LOCASE_CHARACTERS)
-                    a7 = random.choice(DIGITS)
-                    a8 = random.choice(UPCASE_CHARACTERS)
-                    a9 = random.choice(DIGITS)
-                    a10 = random.choice(UPCASE_CHARACTERS)
-                    a11 = random.choice(UPCASE_CHARACTERS)
-                    a12 = random.choice(DIGITS)
-                    a13 = random.choice(DIGITS)
-                    a14 = random.choice(UPCASE_CHARACTERS)
-                    a15 = random.choice(LOCASE_CHARACTERS)
-                    a16 = random.choice(UPCASE_CHARACTERS)
+                for i in range(17):
+                    password.append(random.choice(characters))
 
-                    generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                random.shuffle(password)
 
-                    generated_password_Filed.delete(0,END)
-                    generated_password_Filed.insert(0,generated_password)
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+
+            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28' and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
+
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + string.digits)
+
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
 
 
             if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
-                a1 = random.choice(UPCASE_CHARACTERS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(SYMBOLS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(LOCASE_CHARACTERS)
-                a7 = random.choice(SYMBOLS)
-                a8 = random.choice(UPCASE_CHARACTERS)
-                a9 = random.choice(UPCASE_CHARACTERS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(UPCASE_CHARACTERS)
-                a12 = random.choice(SYMBOLS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(UPCASE_CHARACTERS)
-                a15 = random.choice(LOCASE_CHARACTERS)
-                a16 = random.choice(UPCASE_CHARACTERS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()')
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
             if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
-                a1 = random.choice(DIGITS)
-                a2 = random.choice(SYMBOLS)
-                a3 = random.choice(LOCASE_CHARACTERS)
-                a4 = random.choice(SYMBOLS)
-                a5 = random.choice(SYMBOLS)
-                a6 = random.choice(LOCASE_CHARACTERS)
-                a7 = random.choice(SYMBOLS)
-                a8 = random.choice(SYMBOLS)
-                a9 = random.choice(DIGITS)
-                a10 = random.choice(LOCASE_CHARACTERS)
-                a11 = random.choice(LOCASE_CHARACTERS)
-                a12 = random.choice(SYMBOLS)
-                a13 = random.choice(SYMBOLS)
-                a14 = random.choice(LOCASE_CHARACTERS)
-                a15 = random.choice(LOCASE_CHARACTERS)
-                a16 = random.choice(DIGITS)
 
-                generated_password = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 +a11 +a12 + a13 +a14 + a15 + a16
+                characters = list(string.ascii_lowercase  + string.digits + '!@#$%^&*()')
 
-                generated_password_Filed.delete(0,END)
-                generated_password_Filed.insert(0,generated_password)
+                ## shuffling the characters
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
 
         def adding_data(e):
             global iid_val
@@ -755,12 +682,11 @@ def login_button_pressed(e):
             password TEXT
             )""")
 
-
             paz_tree.insert(iid=iid_val, index='end', parent='', values=(f'{sno_inp}', f'{website_name}', f'{username_inp}', f'{password_inp}'))
             c.execute(f"INSERT INTO passwords VALUES ('{sno_inp}','{website_name}','{username_inp}','{password_inp}')")
             iid_val += 1
 
-            # Clsoning the conntection
+            # completing the connection between front-end and back-end
             conn.commit()
             conn.close()
 
