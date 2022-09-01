@@ -39,7 +39,6 @@ invalid_password_page = PhotoImage(file='Sign_Up/no_match_sign_in.png')
 login_page_img = PhotoImage(file = 'Login/login.png')
 login_button_img = PhotoImage(file = 'Login/login_button.png')
 login_incorrect = PhotoImage(file = 'Login/login_incorrect_img.png')
-login_succesful = PhotoImage(file = 'Login/login_succesful_img.png')
 less_characters_sign_up = PhotoImage(file = 'Sign_Up/less_characters_sign_up_img.png')
 manager_baground = PhotoImage(file = 'Manager/manager.png')
 hover_on_exit = PhotoImage(file = 'Hover Animations/Exit On hover.png')
@@ -141,7 +140,6 @@ def login_button_pressed(e):
 
 
     if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
-        login_bag.config(image = login_succesful)
         window.withdraw()
 
         new_window = Toplevel()
@@ -902,8 +900,6 @@ login_password_field1 = Entry(login_page,width=25, show = '*', bd=0,fg = '#b7b7b
 log_in_button = Button(login_page,image = login_button_img,bd=  0,activebackground = '#1d1d1f', bg ='#1d1d1f')
 exit_button_2 = Button(login_page,activebackground = '#1d1d1f',image = exit_button_image,bd = 0, bg ='#1a1a1c')
 show_hide_button = Button(login_page,activebackground = '#1d1d1f',image = eyes_closed_icon,bd = 0, bg ='#1a1a1c')
-
-
 
 # Griding the widgets
 login_bag.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
