@@ -18,7 +18,7 @@ total_clicks = 0
 total_clicks1 = 0
 total_clicks2 = 0
 total_clicks3 = 0
-button_clicks1 = 0
+
 # Creating all pages in the app
 sign_up_page = Frame(window)
 login_page = Frame(window)
@@ -39,6 +39,7 @@ invalid_password_page = PhotoImage(file='Sign_Up/no_match_sign_in.png')
 login_page_img = PhotoImage(file = 'Login/login.png')
 login_button_img = PhotoImage(file = 'Login/login_button.png')
 login_incorrect = PhotoImage(file = 'Login/login_incorrect_img.png')
+login_succesful = PhotoImage(file = 'Login/login_succesful_img.png')
 less_characters_sign_up = PhotoImage(file = 'Sign_Up/less_characters_sign_up_img.png')
 manager_baground = PhotoImage(file = 'Manager/manager.png')
 hover_on_exit = PhotoImage(file = 'Hover Animations/Exit On hover.png')
@@ -62,11 +63,6 @@ check_button_disable_img = PhotoImage(file = 'Manager/clicker_disabled.png')
 check_button_enabled_img = PhotoImage(file = 'Manager/clicker_enabled.png')
 generate_button_image = PhotoImage(file = 'Manager/generate_button.png')
 clear_fields_button_image = PhotoImage(file = 'Manager/clear_Feild_img.png')
-exit_button_image = PhotoImage(file = 'Sign_Up/exit_button.png')
-sing_up_button_hover = PhotoImage(file = 'Sign_Up/sign_up_button_on_hover.png')
-eyes_closed_icon = PhotoImage(file='Login/eyes closed.png')
-eyes_open_icon = PhotoImage(file='Login/eyes open .png')
-login_button_hover_image = PhotoImage(file = 'Login/login_button_hover_animation.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -85,11 +81,12 @@ window.overrideredirect(True)
 
 # Widgets
 baground = Label(sign_up_page,image = sign_up_img,bg = 'black')
-username_field = Entry(sign_up_page,width=25, bd=0,fg = '#b7b7b7', font=('Roboto Medium', 17), bg  ='#1d1d1f',insertbackground = '#626262')
-password_field1 = Entry(sign_up_page,width=25, bd=0,fg = '#b7b7b7', font=('Roboto Medium', 17), bg  ='#1d1d1f',insertbackground = '#626262')
-password_field2 = Entry(sign_up_page,width=25, bd=0,fg = '#b7b7b7', font=('Roboto Medium', 17), bg  ='#1d1d1f',insertbackground = '#626262')
-sign_up_button = Button(sign_up_page,bd = 0,image=sign_up_button_image,activebackground = '#1d1d1f', bg ='#1a1a1c')
-exit_button_1 = Button(sign_up_page,activebackground = 'black',image = exit_button_image,bd = 0, bg ='#1a1a1c')
+username_field = Entry(sign_up_page,width=17, bd=0, font=('Arial Bold', 21), bg='#ebebeb')
+password_field1 = Entry(sign_up_page,width=17, bd=0, font=('Arial', 21), bg='#ebebeb')
+password_field2 = Entry(sign_up_page,width=17, bd=0, font=('Arial', 21), bg='#ebebeb')
+exit_button_1 = Button(sign_up_page,text = 'X',width = 3,bd = 0,font = ('arial bold',10),bg = 'red',fg = 'white')
+
+
 
 def button_Click(e):
     global invalid_counter
@@ -136,8 +133,8 @@ def login_button_pressed(e):
     for u in c.fetchall():
         print(u)
 
-
     if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
+        login_bag.config(image = login_succesful)
         window.withdraw()
 
         new_window = Toplevel()
@@ -234,7 +231,6 @@ def login_button_pressed(e):
         generate_button = Label(password_manager_page,bd = 0,image = generate_button_image)
 
         # Animations
-
         def on_hover_exit(e):
             button7.config(image = hover_on_exit)
         def on_leave_exit(e):
@@ -264,8 +260,6 @@ def login_button_pressed(e):
         def on_leave_export(e):
             button5.config(image = export_button)
 
-
-
         # copy to clipboard
         def copy_wbsite_name_to_clip_board(e):
             password_gen = entr1.get()
@@ -285,7 +279,6 @@ def login_button_pressed(e):
             password_manager_page.clipboard_append(password_gen)
             password_manager_page.update()
 
-
         # adding function to buttons
         button7.bind("<Enter>",on_hover_exit)
         button7.bind("<Leave>",on_leave_exit)
@@ -301,9 +294,6 @@ def login_button_pressed(e):
         button4.bind("<Leave>",on_leave_import)
         button5.bind("<Enter>",on_hover_export)
         button5.bind("<Leave>",on_leave_export)
-
-
-
         copy1.bind("<Button>",copy_wbsite_name_to_clip_board)
         copy2.bind("<Button>",copy_username_name_to_clip_board)
         copy3.bind("<Button>",copy_password_name_to_clip_board)
@@ -781,13 +771,13 @@ def login_button_pressed(e):
             entr2.delete(0,END)
             entr3.delete(0,END)
 
-        # # Delete data from squlite3 and Treeview
-        # def delete_file(e):
-        #     pass # under work
-        #     # file = os.getcwd() + '\password_data.db'
-        #     # os.remove(file)
-        #     # messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
-        #     # new_window.destroy()
+        # Delete data from squlite3 and Treeview
+        def delete_file(e):
+            pass # under work
+            # file = os.getcwd() + '\password_data.db'
+            # os.remove(file)
+            # messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
+            # new_window.destroy()
 
         # adding functions to remaing buttons
         button7.bind("<Button>",exit_application)
@@ -807,8 +797,6 @@ def login_button_pressed(e):
         check_button3.bind("<Button>",button_clicked3)
         button8.bind("<Button>",adding_data)
         button9.bind("<Button>", clear_data)
-
-
 
         # Printing data on rows and columns
         conn = sqlite3.connect("password_data.db")
@@ -868,83 +856,40 @@ def exit_applicaation(e):
     window.after(200,lambda:window.destroy())
 
 # Griding the widgets!
+sign_up_button = Button(sign_up_page,bd = 0,image=sign_up_button_image)
 baground.grid(row=1, column=1, columnspan=100, rowspan=100)
-username_field.grid(row=37, column=78)
-password_field1.grid(row=48, column=78)
-password_field2.grid(row=58, column=78)
-sign_up_button.grid(row=52, column=31, columnspan=100, rowspan=100)
-exit_button_1.grid(row = 2,column = 100)
-
-
-def hover_over_sing_up_button(e):
-    sign_up_button.config(image=sing_up_button_hover)
-
-def leave_hover_over_sing_up_button(e):
-    sign_up_button.config(image=sign_up_button_image)
-
-
+exit_button_1.grid(row = 1,column = 100)
+username_field.grid(row=40, column=80)
+password_field1.grid(row=53, column=80)
+password_field2.grid(row=66, column=80)
+sign_up_button.grid(row=67, column=64, columnspan=100, rowspan=100)
 
 # Widget Binding
 sign_up_button.bind("<Button>",button_Click)
-sign_up_button.bind("<Enter>",hover_over_sing_up_button)
-sign_up_button.bind("<Leave>",leave_hover_over_sing_up_button)
-
 exit_button_1.bind("<Button>",exit_applicaation)
 
 # Creating the login widgets
-login_bag = Label(login_page,image = login_page_img,bg = 'black') #'#1d1d1f'
-login_username_field = Entry(login_page,width=25, bd=0,fg = '#b7b7b7', font=('Roboto Medium', 17), bg  ='#1d1d1f',insertbackground = '#626262')
-login_password_field1 = Entry(login_page,width=25, show = '*', bd=0,fg = '#b7b7b7', font=('Roboto Medium', 17), bg  ='#1d1d1f',insertbackground = '#626262')
-log_in_button = Button(login_page,image = login_button_img,bd=  0,activebackground = '#1d1d1f', bg ='#1d1d1f')
-exit_button_2 = Button(login_page,activebackground = '#1d1d1f',image = exit_button_image,bd = 0, bg ='#1a1a1c')
-show_hide_button = Button(login_page,activebackground = '#1d1d1f',image = eyes_closed_icon,bd = 0, bg ='#1a1a1c')
-
-
+login_bag = Label(login_page,image = login_page_img,bg = 'black')
+login_username_field = Entry(login_page,width=17, bd=0, font=('Arial Bold', 21), bg='#ebebeb')
+login_password_field1 = Entry(login_page,show = '•',width=17, bd=0, font=('Arial', 21), bg='#ebebeb')
+log_in_button = Button(login_page,bd = 0,image=login_button_img)
+exit_button_2 = Button(login_page,text = 'X',width = 3,bd = 0,font = ('arial bold',10),bg = 'red',fg = 'white')
 
 # Griding the widgets
 login_bag.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
 exit_button_2.grid(row = 1,column = 100)
-login_username_field.grid(row =40,column = 36,columnspan = 100)
-login_password_field1.grid(row = 54,column = 36,columnspan = 100)
-show_hide_button.grid(row = 54,column =72,columnspan = 100)
-log_in_button.grid(row = 65,column = 23,columnspan = 100)
-
-# hover animations
-
-def login_button_hover_over(e):
-    log_in_button.config(image=login_button_hover_image)
-
-def login_button_hover_leave(e):
-    log_in_button.config(image=login_button_img)
-
-
-# Show hide functionality
-
-def change(e):
-    global button_clicks1
-    button_clicks1 += 1
-    if button_clicks1 % 2 == 0:
-        show_hide_button.config(image = eyes_open_icon)
-        login_password_field1.config(show = '*')
-
-    else:
-        show_hide_button.config(image = eyes_closed_icon)
-        login_password_field1.config(show = '')
-
+login_username_field.grid(row =51,column = 43,columnspan = 100)
+login_password_field1.grid(row = 65,column = 43,columnspan = 100)
+log_in_button.grid(row = 85,column = 47,columnspan = 100)
 
 # Binding the widgets
-
 log_in_button.bind('<Button>',login_button_pressed)
-log_in_button.bind('<Enter>',login_button_hover_over)
-log_in_button.bind('<Leave>',login_button_hover_leave)
 sign_up_button.bind("<Button>",button_Click)
 exit_button_2.bind("<Button>",exit_applicaation)
-show_hide_button.bind('<Button>',change)
 
 # Check weather the user already has an account
 if os.path.isfile('sign_up.db'):
     switch_page(login_page)
-
 else:
     switch_page(sign_up_page)
 
