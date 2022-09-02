@@ -4,6 +4,7 @@ import sqlite3
 from tkinter import *
 import os
 from tkinter import ttk
+import ttkthemes
 from tkinter import filedialog
 import shutil
 from tkinter import messagebox
@@ -66,7 +67,10 @@ exit_button_image = PhotoImage(file = 'Sign_Up/exit_button.png')
 sing_up_button_hover = PhotoImage(file = 'Sign_Up/sign_up_button_on_hover.png')
 eyes_closed_icon = PhotoImage(file='Login/eyes closed.png')
 eyes_open_icon = PhotoImage(file='Login/eyes open .png')
-
+search_icon_image = PhotoImage(file = 'Manager/search_icon.png')
+refresh_icon_image = PhotoImage(file='Manager/refresh_icon.png')
+import_icon_image = PhotoImage(file='Manager/import_image.png')
+export_icon_image = PhotoImage(file='Manager/export_image.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -154,8 +158,8 @@ def login_button_pressed(e):
             frames.grid(row=0, column=0, sticky='news')
 
         # Window Parameters
-        height_of_win = 838
-        width_of_win = 1388
+        height_of_win = 864
+        width_of_win = 1420
         screen_width = new_window.winfo_screenwidth()
         screen_height = new_window.winfo_screenheight()
         x_cord = (screen_width / 2) - (width_of_win / 2)
@@ -177,15 +181,14 @@ def login_button_pressed(e):
         # styling the elements
         Style = ttk.Style()
         Style.theme_use('default')
-        Style.configure("Treeview", background="white",
-        foreground="black",rowheight = 45,bd= 0,highlightcolor = 'white',font = ('Helvetica',15))
-        Style.configure("Treeview.Heading", background="#171a1f", foreground="white",font = ('arial',14))
-        Style.map("Treeview",background = [('selected','#ECECEC')],foreground = [('selected','#753de1')])
-
+        Style.configure("Treeview", background="#1d1d1f",fieldbackground = '#1d1d1f',
+        foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Hack',15))
+        Style.configure("Treeview.Heading",bd= 0, background="#1d1d1f", foreground="#717173",font = ('Hack',16))
+        Style.map("Treeview",background = [('selected','#1d1d1f')],foreground = [('selected','white')])
         #styling rows
         paz_tree.column('#0',width = 0,minwidth = 0)
-        paz_tree.column('sno',width = 200,minwidth = 40,anchor = CENTER)
-        paz_tree.column('website_name',width = 240,minwidth = 40,anchor = CENTER)
+        paz_tree.column('sno',width = 150,minwidth = 40,anchor = CENTER)
+        paz_tree.column('website_name',width = 290,minwidth = 40,anchor = CENTER)
         paz_tree.column('username',width = 260,minwidth = 40,anchor = CENTER)
         paz_tree.column('password',width = 310,minwidth = 40,anchor = CENTER)
 
@@ -215,6 +218,13 @@ def login_button_pressed(e):
         entr2 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
         entr3 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
         generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#111418',bd = 0,fg = 'white',width = 28,font = ('arial',12))
+
+        # New widgets
+        search_box = Entry(password_manager_page, width=25, bd=0, fg='#b7b7b7', font=('Roboto Medium', 16), bg='#1a1a1c',insertbackground='#626262')
+        search_button = Button(password_manager_page, bd=0, image=search_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        refresh_button = Button(password_manager_page,bd= 0,image = refresh_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        importButton =  Button(password_manager_page,bd= 0,image = import_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        exportButton =  Button(password_manager_page,bd= 0,image = export_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
 
         # Griding the widgets
         button1 = Label(password_manager_page,bd= 0,image = new_button)
@@ -756,7 +766,7 @@ def login_button_pressed(e):
             old_directory = os.getcwd() + '\password_data.db'
             new_directory = file.name
             shutil.copyfile(src = old_directory,dst = new_directory)
-            messagebox.showinfo(" < Export Successful > ",'Your database file (password_data.db) has been exported to the specified directory... ')
+            messagebox.showinfo("Password Manager",'Your file has been exported successfully!')
 
         # Move data into program
         def import_Files(e):
@@ -783,6 +793,74 @@ def login_button_pressed(e):
             entr2.delete(0,END)
             entr3.delete(0,END)
 
+        # search record :
+
+        def search_records(e):
+            lookup_record = search_box.get()
+
+            # Clear the Treeview
+            for record in paz_tree.get_children():
+                paz_tree.delete(record)
+
+            # Create a database or connect to one that exists
+            conn = sqlite3.connect('password_data.db')
+
+            # Create a cursor instance
+            c = conn.cursor()
+
+            c.execute('SELECT website_name, * FROM passwords WHERE website_name LIKE "%{}%"'.format(lookup_record))
+            records = c.fetchall()
+
+            # Add our data to the screen
+            global count
+            count = 0
+
+            # for record in records:
+
+            for record in records:
+                print(record)
+                if count % 2 == 0:
+                    paz_tree.insert(parent='', index='end', iid=count, text='',
+                                   values=(record[1],record[0],record[3],record[4]),
+                                   tags=('evenrow',))
+                    print('insert chekc')
+                else:
+                    paz_tree.insert(parent='', index='end', iid=count, text='',
+                                   values=(record[1],record[0],record[3],record[4]),
+                                   tags=('evenrow',))
+                    # increment counter
+                count += 1
+
+            # Commit changes
+            conn.commit()
+
+            # Close our connection
+            conn.close()
+
+        def refresh_treeview_page(e):
+            # clearing the treeview
+            for item in paz_tree.get_children():
+                paz_tree.delete(item)
+
+            # Printing data on rows and columns
+            conn = sqlite3.connect("password_data.db")
+            c = conn.cursor()
+
+            c.execute("SELECT * FROM passwords")
+            rows = c.fetchall()
+
+            # thsi code converts SQL data and shows into treeview
+            for row in rows:
+                print(row)
+                paz_tree.insert("", END, values=row)
+
+            c.execute("""CREATE TABLE IF NOT EXISTS passwords (
+            sno TEXT,website_name TEXT,username TEXT,password TEXT)""")
+
+            conn.commit()
+            conn.close()
+
+
         # Delete data from squlite3 and Treeview
         def delete_file(e):
             pass # under work
@@ -792,25 +870,28 @@ def login_button_pressed(e):
             # new_window.destroy()
 
         # adding functions to remaing buttons
-        button7.bind("<Button>",exit_application)
-        paz_tree.bind('<Button-1>', selectItem)
-        button8.bind("<Button>",clear_Fields)
-        button4.bind("<Button>",import_Files)
-        button5.bind("<Button>",export_Files)
-        button7.bind("<Button>",exit_application)
-        button1.bind("<Button>",adding_data)
-        button2.bind("<Button>",update_data)
-        button3.bind("<Button>",delete_data)
-        button6.bind("<Button>",delete_file)
-        generate_button.bind("<Button>",generate_random_password)
-        check_button1.bind("<Button>",button_clicked)
-        check_button2.bind("<Button>",button_clicked1)
-        check_button4.bind("<Button>",button_clicked2)
-        check_button3.bind("<Button>",button_clicked3)
-        button8.bind("<Button>",adding_data)
-        button9.bind("<Button>", clear_data)
+        # button7.bind("<Button>",exit_application)
+        # paz_tree.bind('<Button-1>', selectItem)
+        # button8.bind("<Button>",clear_Fields)
+        # button4.bind("<Button>",import_Files)
+        # button5.bind("<Button>",export_Files)
+        # button7.bind("<Button>",exit_application)
+        # button1.bind("<Button>",adding_data)
+        # button2.bind("<Button>",update_data)
+        # button3.bind("<Button>",delete_data)
+        # button6.bind("<Button>",delete_file)
+        # generate_button.bind("<Button>",generate_random_password)
+        # check_button1.bind("<Button>",button_clicked)
+        # check_button2.bind("<Button>",button_clicked1)
+        # check_button4.bind("<Button>",button_clicked2)
+        # check_button3.bind("<Button>",button_clicked3)
+        # button8.bind("<Button>",adding_data)
+        # button9.bind("<Button>", clear_data)
 
-
+        search_button.bind("<Button>",search_records)
+        refresh_button.bind("<Button>",refresh_treeview_page)
+        importButton.bind("<Button>", import_Files)
+        exportButton.bind("<Button>", export_Files)
 
         # Printing data on rows and columns
         conn = sqlite3.connect("password_data.db")
@@ -830,31 +911,43 @@ def login_button_pressed(e):
         conn.commit()
         conn.close()
 
+        # New elements :
+
+
+
         # gridding the widgets
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
-        button1.grid(row = 70,column = 3)
-        button2.grid(row = 72,column = 3)
-        button3.grid(row = 74,column = 3)
-        button4.grid(row = 76,column = 3)
-        button5.grid(row = 78,column = 3)
-        button6.grid(row = 80,column = 3)
-        button7.grid(row = 82,column = 3)
-        paz_tree.grid(row = 4,column = 4,columnspan = 100,rowspan = 74)
-        entr.grid(row = 74,column = 1,columnspan = 41,rowspan =800)
-        entr1.grid(row = 74,column = 1,columnspan = 68,rowspan =300)
-        entr2.grid(row = 76,column = 1,columnspan = 68,rowspan =60)
-        entr3.grid(row = 77,column = 1,columnspan = 68,rowspan =500)
-        button8.grid(row = 81,column = 1,columnspan = 60,rowspan =10)
-        button9.grid(row = 81,column = 1,columnspan = 80,rowspan =10)
-        copy1.grid(row = 74,column = 1,columnspan = 125,rowspan =800)
-        copy2.grid(row = 76,column = 1,columnspan = 125,rowspan =800)
-        copy3.grid(row = 77,column = 1,columnspan = 125,rowspan =800)
-        generated_password_Filed.grid(row = 74,column = 45,columnspan = 200,rowspan =800)
-        check_button1.grid(row = 76,column = 18,columnspan = 200,rowspan =200)
-        check_button2.grid(row = 76,column = 50,columnspan = 200,rowspan =200)
-        check_button3.grid(row = 78,column = 50,columnspan = 200,rowspan =200)
-        check_button4.grid(row = 78,column = 18,columnspan = 200,rowspan =200)
-        generate_button.grid(row = 81,column = 44,columnspan = 200,rowspan =10)
+        search_box.grid(row = 2,column = 89)
+        search_button.grid(row = 2,column= 91)
+        refresh_button.grid(row = 2,column = 84)
+        importButton.grid(row = 2,column= 36)
+        exportButton.grid(row = 2,column= 37)
+        paz_tree.grid(row = 1,column = 25,rowspan = 74,columnspan = 100)
+
+
+        # button1.grid(row = 70,column = 3)
+        # button2.grid(row = 72,column = 3)
+        # button3.grid(row = 74,column = 3)
+        # button4.grid(row = 76,column = 3)
+        # button5.grid(row = 78,column = 3)
+        # button6.grid(row = 80,column = 3)
+        # button7.grid(row = 82,column = 3)
+        #paz_tree.grid(row = 4,column = 4,columnspan = 100,rowspan = 74)
+        # entr.grid(row = 74,column = 1,columnspan = 41,rowspan =800)
+        # entr1.grid(row = 74,column = 1,columnspan = 68,rowspan =300)
+        # entr2.grid(row = 76,column = 1,columnspan = 68,rowspan =60)
+        # entr3.grid(row = 77,column = 1,columnspan = 68,rowspan =500)
+        # button8.grid(row = 81,column = 1,columnspan = 60,rowspan =10)
+        # button9.grid(row = 81,column = 1,columnspan = 80,rowspan =10)
+        # copy1.grid(row = 74,column = 1,columnspan = 125,rowspan =800)
+        # copy2.grid(row = 76,column = 1,columnspan = 125,rowspan =800)
+        # copy3.grid(row = 77,column = 1,columnspan = 125,rowspan =800)
+        # generated_password_Filed.grid(row = 74,column = 45,columnspan = 200,rowspan =800)
+        # check_button1.grid(row = 76,column = 18,columnspan = 200,rowspan =200)
+        # check_button2.grid(row = 76,column = 50,columnspan = 200,rowspan =200)
+        # check_button3.grid(row = 78,column = 50,columnspan = 200,rowspan =200)
+        # check_button4.grid(row = 78,column = 18,columnspan = 200,rowspan =200)
+        # generate_button.grid(row = 81,column = 44,columnspan = 200,rowspan =10)
 
         new_window.mainloop()
 
@@ -890,6 +983,7 @@ def leave_hover_over_sing_up_button(e):
 sign_up_button.bind("<Button>",button_Click)
 sign_up_button.bind("<Enter>",hover_over_sing_up_button)
 sign_up_button.bind("<Leave>",leave_hover_over_sing_up_button)
+
 
 exit_button_1.bind("<Button>",exit_applicaation)
 
