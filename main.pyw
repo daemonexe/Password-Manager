@@ -20,6 +20,7 @@ total_clicks1 = 0
 total_clicks2 = 0
 total_clicks3 = 0
 button_clicks1 = 0
+
 # Creating all pages in the app
 sign_up_page = Frame(window)
 login_page = Frame(window)
@@ -95,8 +96,6 @@ password_field2 = Entry(sign_up_page,width=25, bd=0,fg = '#b7b7b7', font=('Robot
 sign_up_button = Button(sign_up_page,bd = 0,image=sign_up_button_image,activebackground = '#1d1d1f', bg ='#1a1a1c')
 exit_button_1 = Button(sign_up_page,activebackground = 'black',image = exit_button_image,bd = 0, bg ='#1a1a1c')
 
-
-
 def button_Click(e):
     global invalid_counter
 
@@ -141,7 +140,6 @@ def login_button_pressed(e):
     c.execute("SELECT * FROM signup")
     for u in c.fetchall():
         print(u)
-
 
     if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
         window.withdraw()
@@ -276,8 +274,6 @@ def login_button_pressed(e):
         def on_leave_export(e):
             button5.config(image = export_button)
 
-
-
         # copy to clipboard
         def copy_wbsite_name_to_clip_board(e):
             password_gen = entr1.get()
@@ -297,7 +293,6 @@ def login_button_pressed(e):
             password_manager_page.clipboard_append(password_gen)
             password_manager_page.update()
 
-
         # adding function to buttons
         button7.bind("<Enter>",on_hover_exit)
         button7.bind("<Leave>",on_leave_exit)
@@ -313,9 +308,6 @@ def login_button_pressed(e):
         button4.bind("<Leave>",on_leave_import)
         button5.bind("<Enter>",on_hover_export)
         button5.bind("<Leave>",on_leave_export)
-
-
-
         copy1.bind("<Button>",copy_wbsite_name_to_clip_board)
         copy2.bind("<Button>",copy_username_name_to_clip_board)
         copy3.bind("<Button>",copy_password_name_to_clip_board)
@@ -786,7 +778,6 @@ def login_button_pressed(e):
             # Rename the imported file to password_data.db
             os.rename(file_name, 'password_data.db')
 
-
         def clear_data(e):
             entr.delete(0,END)
             entr1.delete(0,END)
@@ -911,10 +902,6 @@ def login_button_pressed(e):
         conn.commit()
         conn.close()
 
-        # New elements :
-
-
-
         # gridding the widgets
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
         search_box.grid(row = 2,column = 89)
@@ -948,9 +935,7 @@ def login_button_pressed(e):
         # check_button3.grid(row = 78,column = 50,columnspan = 200,rowspan =200)
         # check_button4.grid(row = 78,column = 18,columnspan = 200,rowspan =200)
         # generate_button.grid(row = 81,column = 44,columnspan = 200,rowspan =10)
-
         new_window.mainloop()
-
     # condition if password was wrong
     else:
         login_bag.config(image = login_incorrect)
@@ -977,14 +962,10 @@ def hover_over_sing_up_button(e):
 def leave_hover_over_sing_up_button(e):
     sign_up_button.config(image=sign_up_button_image)
 
-
-
 # Widget Binding
 sign_up_button.bind("<Button>",button_Click)
 sign_up_button.bind("<Enter>",hover_over_sing_up_button)
 sign_up_button.bind("<Leave>",leave_hover_over_sing_up_button)
-
-
 exit_button_1.bind("<Button>",exit_applicaation)
 
 # Creating the login widgets
@@ -1011,7 +992,6 @@ def hover_over_sing_up_button(e):
 def leave_hover_over_sing_up_button(e):
     sign_up_button.config(image=sign_up_button_image)
 
-
 # Show hide functionality
 
 def change(e):
@@ -1024,8 +1004,6 @@ def change(e):
     else:
         show_hide_button.config(image = eyes_closed_icon)
         login_password_field1.config(show = '')
-
-
 
 # Binding the widgets
 log_in_button.bind('<Button>',login_button_pressed)
