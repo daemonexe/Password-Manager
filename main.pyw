@@ -4,7 +4,6 @@ import sqlite3
 from tkinter import *
 import os
 from tkinter import ttk
-import ttkthemes
 from tkinter import filedialog
 import shutil
 from tkinter import messagebox
@@ -50,20 +49,6 @@ hover_on_delete = PhotoImage(file = 'Hover Animations/hover delete.png')
 hover_on_update = PhotoImage(file = 'Hover Animations/Update on hover.png')
 hover_on_import = PhotoImage(file = 'Hover Animations/import on hover.png')
 hover_on_export = PhotoImage(file = 'Hover Animations/export hover.png')
-new_button = PhotoImage(file = 'Manager/button.png')
-update_button = PhotoImage(file = 'Manager/update_button.png')
-delete_button = PhotoImage(file = 'Manager/delete_button.png')
-reset_button = PhotoImage(file = 'Manager/reset_button.png')
-import_button = PhotoImage(file = 'Manager/import_button.png')
-export_button = PhotoImage(file = 'Manager/export_button.png')
-exit_button = PhotoImage(file = 'Manager/exit_button.png')
-copy_button_img = PhotoImage(file = 'Manager/copy button.png')
-add_button_new = PhotoImage(file = 'Manager/add_button.png')
-new_copy_image = PhotoImage(file = 'Manager/new copy image.png')
-check_button_disable_img = PhotoImage(file = 'Manager/clicker_disabled.png')
-check_button_enabled_img = PhotoImage(file = 'Manager/clicker_enabled.png')
-generate_button_image = PhotoImage(file = 'Manager/generate_button.png')
-clear_fields_button_image = PhotoImage(file = 'Manager/clear_Feild_img.png')
 exit_button_image = PhotoImage(file = 'Sign_Up/exit_button.png')
 sing_up_button_hover = PhotoImage(file = 'Sign_Up/sign_up_button_on_hover.png')
 eyes_closed_icon = PhotoImage(file='Login/eyes closed.png')
@@ -72,6 +57,10 @@ search_icon_image = PhotoImage(file = 'Manager/search_icon.png')
 refresh_icon_image = PhotoImage(file='Manager/refresh_icon.png')
 import_icon_image = PhotoImage(file='Manager/import_image.png')
 export_icon_image = PhotoImage(file='Manager/export_image.png')
+update_button_image = PhotoImage(file = 'Manager/update_button_image.png')
+delete_button_image = PhotoImage(file = 'Manager/delete_button_image.png')
+reset_button_image = PhotoImage(file = 'Manager/reset_button_image.png')
+logout_button_image =  PhotoImage(file = 'Manager/logout_button_image.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -129,6 +118,7 @@ def button_Click(e):
 
 def login_button_pressed(e):
     global invalid_counter
+    global value
     conn = sqlite3.connect("sign_up.db")
     c = conn.cursor()
 
@@ -136,12 +126,14 @@ def login_button_pressed(e):
     username DATATYPE,
     password TEXT
     )""")
-
+    value = True
     c.execute("SELECT * FROM signup")
     for u in c.fetchall():
         print(u)
 
-    if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
+    #if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
+    if value == True:
+
         window.withdraw()
 
         new_window = Toplevel()
@@ -157,7 +149,7 @@ def login_button_pressed(e):
 
         # Window Parameters
         height_of_win = 864
-        width_of_win = 1420
+        width_of_win = 1450
         screen_width = new_window.winfo_screenwidth()
         screen_height = new_window.winfo_screenheight()
         x_cord = (screen_width / 2) - (width_of_win / 2)
@@ -179,16 +171,16 @@ def login_button_pressed(e):
         # styling the elements
         Style = ttk.Style()
         Style.theme_use('default')
-        Style.configure("Treeview", background="#1d1d1f",fieldbackground = '#1d1d1f',
+        Style.configure("Treeview", background="#202022",borderwidth = 0,fieldbackground = '#1f1f21',
         foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Hack',15))
-        Style.configure("Treeview.Heading",bd= 0, background="#1d1d1f", foreground="#717173",font = ('Hack',16))
-        Style.map("Treeview",background = [('selected','#1d1d1f')],foreground = [('selected','white')])
+        Style.configure("Treeview.Heading",borderwidth = 0,bd= 0, background="#202022", foreground="#989898",font = ('Hack',16))
+        Style.map("Treeview",background = [('selected','#202022')],foreground = [('selected','white')])
         #styling rows
         paz_tree.column('#0',width = 0,minwidth = 0)
-        paz_tree.column('sno',width = 150,minwidth = 40,anchor = CENTER)
-        paz_tree.column('website_name',width = 290,minwidth = 40,anchor = CENTER)
-        paz_tree.column('username',width = 260,minwidth = 40,anchor = CENTER)
-        paz_tree.column('password',width = 310,minwidth = 40,anchor = CENTER)
+        paz_tree.column('sno',width = 140,minwidth = 40,anchor = CENTER)
+        paz_tree.column('website_name',width = 290,minwidth = 50,anchor = CENTER)
+        paz_tree.column('username',width = 310,minwidth = 80,anchor = CENTER)
+        paz_tree.column('password',width = 290,minwidth = 40,anchor = CENTER)
 
         # style headings
         paz_tree.heading("sno",text = 'Sno')
@@ -210,69 +202,49 @@ def login_button_pressed(e):
         rows = c.fetchall()
         print('rows are ',rows)
 
+        button_image = PhotoImage(file = 'Manager/button_image_.png')
+
+        copy_image = PhotoImage(file = 'Manager/copy_button_image.png')
+        add_data_new_image = PhotoImage(file = 'Manager/add_database_image .png')
+        clear_field_image = PhotoImage(file = 'Manager/clear_fields_image.png')
+
+
         # widgets
-        entr = Entry(password_manager_page,width = 2,font = ('arial',14),bg = '#111418',bd = 0,fg = 'white')
-        entr1 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
-        entr2 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
-        entr3 = Entry(password_manager_page,bg = '#111418',bd = 0,fg = 'white',width = 24,font = ('arial',12))
-        generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#111418',bd = 0,fg = 'white',width = 28,font = ('arial',12))
+        entr = Entry(password_manager_page,width = 2,font = ('Hack',14),bg = '#1f1f21',bd = 0,fg = '#989898')
+        entr1 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
+        entr2 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
+        entr3 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
+        copy_to_clip_button = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
+        copy_to_clip_button_1 = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
+        copy_to_clip_button_2 = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
+        generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#1f1f21',bd = 0,fg = '#989898',width = 30,font = ('Hack',11))
+
+        check_buton_img_disabled = PhotoImage(file = 'Manager/check_button_disabled.png')
+        check_buton_img_enabled = PhotoImage(file = 'Manager/check_button_enabled.png')
 
         # New widgets
-        search_box = Entry(password_manager_page, width=25, bd=0, fg='#b7b7b7', font=('Roboto Medium', 16), bg='#1a1a1c',insertbackground='#626262')
-        search_button = Button(password_manager_page, bd=0, image=search_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        search_box = Entry(password_manager_page, width=25, bd=0, fg='#7b7b7b', font=('Roboto Medium', 16), bg='#202022',insertbackground='#626262')
+        search_button = Button(password_manager_page, bd=0, image=search_icon_image, activebackground='#1a1a1c', bg='#202022')
         refresh_button = Button(password_manager_page,bd= 0,image = refresh_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
         importButton =  Button(password_manager_page,bd= 0,image = import_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
         exportButton =  Button(password_manager_page,bd= 0,image = export_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        b1=  Button(password_manager_page,bd= 0,image = button_image, activebackground='#1d1d1f', bg='#1d1d1f')
+        b2 =  Button(password_manager_page,bd= 0,image = update_button_image, activebackground='#1d1d1f', bg='#1d1d1f')
+        b3=  Button(password_manager_page,bd= 0,image = delete_button_image , activebackground='#1d1d1f', bg='#1d1d1f')
+        b4=  Button(password_manager_page,bd= 0,image = reset_button_image  , activebackground='#1d1d1f', bg='#1d1d1f')
+        b5=  Button(password_manager_page,bd= 0,image = logout_button_image, activebackground='#1d1d1f', bg='#1d1d1f')
+
+        add_button=  Button(password_manager_page,bd= 0,image = add_data_new_image, activebackground='#1a1a1c', bg='#1a1a1c')
+
+        clear_button =  Button(password_manager_page,bd= 0,image = clear_field_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        generate_button_image_pro = PhotoImage(file = 'Manager/generate_button_image.png')
 
         # Griding the widgets
-        button1 = Label(password_manager_page,bd= 0,image = new_button)
-        button2 = Label(password_manager_page,bd= 0,image = update_button)
-        button3 = Label(password_manager_page,bd= 0,image = delete_button)
-        button4 = Label(password_manager_page,bd= 0,image = import_button)
-        button5 = Label(password_manager_page,bd= 0,image = export_button)
-        button6 = Label(password_manager_page,bd= 0,image = reset_button)
-        button7 = Label(password_manager_page,bd= 0,image = exit_button)
-        button8 = Label(password_manager_page,bd= 0,image = add_button_new)
-        button9 = Label(password_manager_page,bd= 0,image = clear_fields_button_image)
-        copy1 = Label(password_manager_page,bd= 0,image = new_copy_image)
-        copy2 = Label(password_manager_page,bd= 0,image = new_copy_image)
-        copy3 = Label(password_manager_page,bd= 0,image = new_copy_image)
-        check_button1 = Label(password_manager_page,bd = 0,image = check_button_disable_img)
-        check_button2 = Label(password_manager_page,bd = 0,image = check_button_disable_img)
-        check_button3 = Label(password_manager_page,bd = 0,image = check_button_disable_img)
-        check_button4 = Label(password_manager_page,bd = 0,image = check_button_disable_img)
-        generate_button = Label(password_manager_page,bd = 0,image = generate_button_image)
-
-        # Animations
-
-        def on_hover_exit(e):
-            button7.config(image = hover_on_exit)
-        def on_leave_exit(e):
-            button7.config(image = exit_button)
-        def on_hover_reset(e):
-            button6.config(image = hover_on_reset)
-        def on_leave_reset(e):
-            button6.config(image = reset_button)
-        def on_hover_add(e):
-            button1.config(image = hover_on_add)
-        def on_leave_add(e):
-            button1.config(image = new_button)
-        def on_hover_update(e):
-            button2.config(image = hover_on_update)
-        def on_leave_update(e):
-            button2.config(image = update_button)
-        def on_hover_delete(e):
-            button3.config(image = hover_on_delete)
-        def on_leave_delete(e):
-            button3.config(image = delete_button)
-        def on_hover_import(e):
-            button4.config(image = hover_on_import)
-        def on_leave_import(e):
-            button4.config(image = import_button)
-        def on_hover_export(e):
-            button5.config(image = hover_on_export)
-        def on_leave_export(e):
-            button5.config(image = export_button)
+        check_button1 = Label(password_manager_page,bd = 0,image = check_buton_img_disabled)
+        check_button2 = Label(password_manager_page,bd = 0,image = check_buton_img_disabled)
+        check_button3 = Label(password_manager_page,bd = 0,image = check_buton_img_disabled)
+        check_button4 = Label(password_manager_page,bd = 0,image = check_buton_img_disabled)
+        generate_button = Label(password_manager_page,bd = 0,image = generate_button_image_pro)
 
         # copy to clipboard
         def copy_wbsite_name_to_clip_board(e):
@@ -293,60 +265,45 @@ def login_button_pressed(e):
             password_manager_page.clipboard_append(password_gen)
             password_manager_page.update()
 
-        # adding function to buttons
-        button7.bind("<Enter>",on_hover_exit)
-        button7.bind("<Leave>",on_leave_exit)
-        button6.bind("<Enter>",on_hover_reset)
-        button6.bind("<Leave>",on_leave_reset)
-        button1.bind("<Enter>",on_hover_add)
-        button1.bind("<Leave>",on_leave_add)
-        button2.bind("<Enter>",on_hover_update)
-        button2.bind("<Leave>",on_leave_update)
-        button3.bind("<Enter>",on_hover_delete)
-        button3.bind("<Leave>",on_leave_delete)
-        button4.bind("<Enter>",on_hover_import)
-        button4.bind("<Leave>",on_leave_import)
-        button5.bind("<Enter>",on_hover_export)
-        button5.bind("<Leave>",on_leave_export)
-        copy1.bind("<Button>",copy_wbsite_name_to_clip_board)
-        copy2.bind("<Button>",copy_username_name_to_clip_board)
-        copy3.bind("<Button>",copy_password_name_to_clip_board)
+        # copy-to-clipboard
+        copy_to_clip_button.bind("<Button>",copy_wbsite_name_to_clip_board)
+        copy_to_clip_button_1.bind("<Button>",copy_username_name_to_clip_board)
+        copy_to_clip_button_2.bind("<Button>",copy_password_name_to_clip_board)
 
         def button_clicked(e):
             global total_clicks
             total_clicks += 2
             if total_clicks == 2:
-                check_button1.config(image = check_button_enabled_img)
+                check_button1.config(image = check_buton_img_enabled)
             if total_clicks == 4:
-                check_button1.config(image = check_button_disable_img)
+                check_button1.config(image = check_buton_img_disabled)
                 total_clicks = 0
 
         def button_clicked1(e):
             global total_clicks1
             total_clicks1 += 2
             if total_clicks1 == 2:
-                check_button2.config(image = check_button_enabled_img)
+                check_button2.config(image = check_buton_img_enabled)
             if total_clicks1 == 4:
-                print(check_button_disable_img)
-                check_button2.config(image = check_button_disable_img)
+                check_button2.config(image = check_buton_img_disabled)
                 total_clicks1 = 0
 
         def button_clicked2(e):
             global total_clicks2
             total_clicks2 += 2
             if total_clicks2 == 2:
-                check_button4.config(image = check_button_enabled_img)
+                check_button3.config(image = check_buton_img_enabled)
             if total_clicks2 == 4:
-                check_button4.config(image = check_button_disable_img)
+                check_button3.config(image = check_buton_img_disabled)
                 total_clicks2 = 0
 
         def button_clicked3(e):
             global total_clicks3
             total_clicks3 += 2
             if total_clicks3 == 2:
-                check_button3.config(image = check_button_enabled_img)
+                check_button4.config(image = check_buton_img_enabled)
             if total_clicks3 == 4:
-                check_button3.config(image = check_button_disable_img)
+                check_button4.config(image = check_buton_img_disabled)
                 total_clicks3 = 0
 
         def generate_random_password(e):
@@ -860,25 +817,11 @@ def login_button_pressed(e):
             # messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
             # new_window.destroy()
 
-        # adding functions to remaing buttons
-        # button7.bind("<Button>",exit_application)
-        # paz_tree.bind('<Button-1>', selectItem)
-        # button8.bind("<Button>",clear_Fields)
-        # button4.bind("<Button>",import_Files)
-        # button5.bind("<Button>",export_Files)
-        # button7.bind("<Button>",exit_application)
-        # button1.bind("<Button>",adding_data)
-        # button2.bind("<Button>",update_data)
-        # button3.bind("<Button>",delete_data)
-        # button6.bind("<Button>",delete_file)
-        # generate_button.bind("<Button>",generate_random_password)
-        # check_button1.bind("<Button>",button_clicked)
-        # check_button2.bind("<Button>",button_clicked1)
-        # check_button4.bind("<Button>",button_clicked2)
-        # check_button3.bind("<Button>",button_clicked3)
-        # button8.bind("<Button>",adding_data)
-        # button9.bind("<Button>", clear_data)
-
+        paz_tree.bind('<Button-1>', selectItem)
+        check_button1.bind('<Button-1>',button_clicked)
+        check_button2.bind('<Button-1>',button_clicked1)
+        check_button3.bind('<Button-1>',button_clicked2)
+        check_button4.bind('<Button-1>',button_clicked3)
         search_button.bind("<Button>",search_records)
         refresh_button.bind("<Button>",refresh_treeview_page)
         importButton.bind("<Button>", import_Files)
@@ -901,42 +844,47 @@ def login_button_pressed(e):
 
         conn.commit()
         conn.close()
+        copy_password_button = Button(password_manager_page,bd= 0,image = copy_image, activebackground='#1a1a1c', bg='#1a1a1c')
+
 
         # gridding the widgets
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
-        search_box.grid(row = 2,column = 89)
+        search_box.grid(row = 2,column = 84)
         search_button.grid(row = 2,column= 91)
-        refresh_button.grid(row = 2,column = 84)
-        importButton.grid(row = 2,column= 36)
-        exportButton.grid(row = 2,column= 37)
-        paz_tree.grid(row = 1,column = 25,rowspan = 74,columnspan = 100)
+        refresh_button.grid(row = 2,column = 81)
+        importButton.grid(row = 2,column= 23,rowspan = 2)
+        exportButton.grid(row = 2,column= 24,rowspan = 2)
+        b1.grid(row = 16,column = 10)
+        b2.grid(row = 18,column = 10)
+        b3.grid(row = 20,column = 10)
+        b4.grid(row = 22,column = 10)
+        b5.grid(row = 92,column = 10)
+        entr.grid(row = 34,column = 1,columnspan = 70,rowspan = 60)
+        entr1.grid(row = 34,column = 11,columnspan = 70,rowspan = 60)
+        entr2.grid(row = 48,column = 11,columnspan = 70,rowspan = 60)
+        entr3.grid(row = 70,column = 11,columnspan = 70,rowspan = 70)
+        clear_button.grid(row = 90,column = 9,columnspan = 75,rowspan =100)
+        add_button.grid(row = 90,column = 10,columnspan = 75,rowspan =100)
+        copy_to_clip_button.grid(row = 34,column = 15,columnspan = 70,rowspan = 60)
+        copy_to_clip_button_1.grid(row = 48,column = 15,columnspan = 70,rowspan = 60)
+        copy_to_clip_button_2.grid(row = 70,column = 15,columnspan = 70,rowspan = 60)
+        generated_password_Filed.grid(row = 62,column = 67,rowspan=15,columnspan= 69)
+        paz_tree.grid(row = 1,column = 12,rowspan = 69,columnspan = 200)
+        copy_password_button.grid(row = 62,column = 85,rowspan=15,columnspan= 5)
+        check_button1.grid(row = 75,column= 41,columnspan=50,rowspan=15)
+        check_button2.grid(row = 79,column= 41,columnspan=50,rowspan=14)
+        check_button3.grid(row = 75,column= 72,columnspan=50,rowspan=15)
+        check_button4.grid(row = 79,column= 72,columnspan=50,rowspan=14)
+        generate_button.grid(row = 90,column = 62,columnspan = 75,rowspan =100)
 
+        # --- Binding the widgets ----
+        b1.bind("<Button>",adding_data)
+        b2.bind('<Button>',update_data)
+        b3.bind('<Button>',delete_data)
 
-        # button1.grid(row = 70,column = 3)
-        # button2.grid(row = 72,column = 3)
-        # button3.grid(row = 74,column = 3)
-        # button4.grid(row = 76,column = 3)
-        # button5.grid(row = 78,column = 3)
-        # button6.grid(row = 80,column = 3)
-        # button7.grid(row = 82,column = 3)
-        #paz_tree.grid(row = 4,column = 4,columnspan = 100,rowspan = 74)
-        # entr.grid(row = 74,column = 1,columnspan = 41,rowspan =800)
-        # entr1.grid(row = 74,column = 1,columnspan = 68,rowspan =300)
-        # entr2.grid(row = 76,column = 1,columnspan = 68,rowspan =60)
-        # entr3.grid(row = 77,column = 1,columnspan = 68,rowspan =500)
-        # button8.grid(row = 81,column = 1,columnspan = 60,rowspan =10)
-        # button9.grid(row = 81,column = 1,columnspan = 80,rowspan =10)
-        # copy1.grid(row = 74,column = 1,columnspan = 125,rowspan =800)
-        # copy2.grid(row = 76,column = 1,columnspan = 125,rowspan =800)
-        # copy3.grid(row = 77,column = 1,columnspan = 125,rowspan =800)
-        # generated_password_Filed.grid(row = 74,column = 45,columnspan = 200,rowspan =800)
-        # check_button1.grid(row = 76,column = 18,columnspan = 200,rowspan =200)
-        # check_button2.grid(row = 76,column = 50,columnspan = 200,rowspan =200)
-        # check_button3.grid(row = 78,column = 50,columnspan = 200,rowspan =200)
-        # check_button4.grid(row = 78,column = 18,columnspan = 200,rowspan =200)
-        # generate_button.grid(row = 81,column = 44,columnspan = 200,rowspan =10)
         new_window.mainloop()
-    # condition if password was wrong
+
+    # --- condition if password was wrong  ---
     else:
         login_bag.config(image = login_incorrect)
         invalid_counter +=  1
