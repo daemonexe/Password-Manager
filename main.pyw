@@ -171,7 +171,7 @@ def login_button_pressed(e):
         # styling the elements
         Style = ttk.Style()
         Style.theme_use('default')
-        Style.configure("Treeview", background="#202022",borderwidth = 0,fieldbackground = '#1f1f21',
+        Style.configure("Treeview", background="#202022",borderwidth = 0,fieldbackground = '#202022',
         foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Hack',15))
         Style.configure("Treeview.Heading",borderwidth = 0,bd= 0, background="#202022", foreground="#989898",font = ('Hack',16))
         Style.map("Treeview",background = [('selected','#202022')],foreground = [('selected','white')])
@@ -228,11 +228,11 @@ def login_button_pressed(e):
         refresh_button = Button(password_manager_page,bd= 0,image = refresh_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
         importButton =  Button(password_manager_page,bd= 0,image = import_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
         exportButton =  Button(password_manager_page,bd= 0,image = export_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
-        b1=  Button(password_manager_page,bd= 0,image = button_image, activebackground='#1d1d1f', bg='#1d1d1f')
-        b2 =  Button(password_manager_page,bd= 0,image = update_button_image, activebackground='#1d1d1f', bg='#1d1d1f')
-        b3=  Button(password_manager_page,bd= 0,image = delete_button_image , activebackground='#1d1d1f', bg='#1d1d1f')
-        b4=  Button(password_manager_page,bd= 0,image = reset_button_image  , activebackground='#1d1d1f', bg='#1d1d1f')
-        b5=  Button(password_manager_page,bd= 0,image = logout_button_image, activebackground='#1d1d1f', bg='#1d1d1f')
+        b1=  Button(password_manager_page,bd= 0,image = button_image, activebackground='#202022', bg='#202022')
+        b2 =  Button(password_manager_page,bd= 0,image = update_button_image, activebackground='#202022', bg='#202022')
+        b3=  Button(password_manager_page,bd= 0,image = delete_button_image , activebackground='#202022', bg='#202022')
+        b4=  Button(password_manager_page,bd= 0,image = reset_button_image  , activebackground='#202022', bg='#202022')
+        b5=  Button(password_manager_page,bd= 0,image = logout_button_image, activebackground='#202022', bg='#202022')
 
         add_button=  Button(password_manager_page,bd= 0,image = add_data_new_image, activebackground='#1a1a1c', bg='#1a1a1c')
 
