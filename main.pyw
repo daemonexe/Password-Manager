@@ -42,13 +42,6 @@ login_button_img = PhotoImage(file = 'Login/login_button.png')
 login_incorrect = PhotoImage(file = 'Login/login_incorrect_img.png')
 less_characters_sign_up = PhotoImage(file = 'Sign_Up/less_characters_sign_up_img.png')
 manager_baground = PhotoImage(file = 'Manager/manager.png')
-hover_on_exit = PhotoImage(file = 'Hover Animations/Exit On hover.png')
-hover_on_reset = PhotoImage(file = 'Hover Animations/reset_on_hover.png')
-hover_on_add = PhotoImage(file = 'Hover Animations/hover on add.png')
-hover_on_delete = PhotoImage(file = 'Hover Animations/hover delete.png')
-hover_on_update = PhotoImage(file = 'Hover Animations/Update on hover.png')
-hover_on_import = PhotoImage(file = 'Hover Animations/import on hover.png')
-hover_on_export = PhotoImage(file = 'Hover Animations/export hover.png')
 exit_button_image = PhotoImage(file = 'Sign_Up/exit_button.png')
 sing_up_button_hover = PhotoImage(file = 'Sign_Up/sign_up_button_on_hover.png')
 eyes_closed_icon = PhotoImage(file='Login/eyes closed.png')
@@ -61,6 +54,23 @@ update_button_image = PhotoImage(file = 'Manager/update_button_image.png')
 delete_button_image = PhotoImage(file = 'Manager/delete_button_image.png')
 reset_button_image = PhotoImage(file = 'Manager/reset_button_image.png')
 logout_button_image =  PhotoImage(file = 'Manager/logout_button_image.png')
+hover_image_add_button =  PhotoImage(file = 'Manager/add_database_hover_image .png')
+hover_image_delete_button = PhotoImage(file = 'Manager/delete_button_hover_image.png')
+hover_image_reset_button =PhotoImage(file = 'Manager/reset_button_hover_image.png')
+hover_image_update_button = PhotoImage(file = 'Manager/update_button_hover_image.png')
+hover_image_add_button_small = PhotoImage(file = 'Manager/add_database_image_hover_image.png')
+hover_image_log_out = PhotoImage(file = 'Manager/logout_button_hover_image.png')
+hover_image_clearfields = PhotoImage(file= 'Manager/clear_fields_image_hover.png')
+hover_on_refresh_image =  PhotoImage(file= 'Manager/refresh_icon_hover_image.png')
+hover_on_import_image = PhotoImage(file= 'Manager/import_image_hover.png')
+hover_on_export_image = PhotoImage(file= 'Manager/export_image_hover.png')
+search_icon_image_hover = PhotoImage(file= 'Manager/search_icon_hover.png')
+generate_button_image_hover = PhotoImage(file= 'Manager/generate_button_image_hover.png')
+copy_button_hover_image =  PhotoImage(file= 'Manager/copy_button_image_hover.png')
+button_image = PhotoImage(file='Manager/button_image_.png')
+copy_image = PhotoImage(file='Manager/copy_button_image.png')
+add_data_new_image = PhotoImage(file='Manager/add_database_image .png')
+clear_field_image = PhotoImage(file='Manager/clear_fields_image.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -174,7 +184,7 @@ def login_button_pressed(e):
         Style.configure("Treeview", background="#202022",borderwidth = 0,fieldbackground = '#202022',
         foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Hack',15))
         Style.configure("Treeview.Heading",borderwidth = 0,bd= 0, background="#202022", foreground="#989898",font = ('Hack',16))
-        Style.map("Treeview",background = [('selected','#202022')],foreground = [('selected','white')])
+        Style.map("Treeview",background = [('selected','#202022')],foreground = [('selected','#e4e4e4')])
         #styling rows
         paz_tree.column('#0',width = 0,minwidth = 0)
         paz_tree.column('sno',width = 140,minwidth = 40,anchor = CENTER)
@@ -202,41 +212,32 @@ def login_button_pressed(e):
         rows = c.fetchall()
         print('rows are ',rows)
 
-        button_image = PhotoImage(file = 'Manager/button_image_.png')
-
-        copy_image = PhotoImage(file = 'Manager/copy_button_image.png')
-        add_data_new_image = PhotoImage(file = 'Manager/add_database_image .png')
-        clear_field_image = PhotoImage(file = 'Manager/clear_fields_image.png')
-
-
         # widgets
-        entr = Entry(password_manager_page,width = 2,font = ('Hack',14),bg = '#1f1f21',bd = 0,fg = '#989898')
-        entr1 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
-        entr2 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
-        entr3 = Entry(password_manager_page,bg = '#1f1f21',bd = 0,fg = '#989898',width = 28,font = ('Hack',11))
+        entr = Entry(password_manager_page,width = 2,font = ('Hack',14),bg = '#1f1f21',bd = 0,fg = '#989898',insertbackground='#626262')
+        entr1 = Entry(password_manager_page,bg = '#202022',bd = 0,fg = '#989898',width = 28,font = ('Hack',11),insertbackground='#626262')
+        entr2 = Entry(password_manager_page,bg = '#202022',bd = 0,fg = '#989898',width = 28,font = ('Hack',11),insertbackground='#626262')
+        entr3 = Entry(password_manager_page,bg = '#202022',bd = 0,fg = '#989898',width = 28,font = ('Hack',11),insertbackground='#626262')
         copy_to_clip_button = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
         copy_to_clip_button_1 = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
         copy_to_clip_button_2 = Button(password_manager_page,image = copy_image, activebackground='#1a1a1c',bd= 0,bg='#1a1a1c')
         generated_password_Filed = Entry(password_manager_page,justify='center',bg = '#1f1f21',bd = 0,fg = '#989898',width = 30,font = ('Hack',11))
-
         check_buton_img_disabled = PhotoImage(file = 'Manager/check_button_disabled.png')
         check_buton_img_enabled = PhotoImage(file = 'Manager/check_button_enabled.png')
 
         # New widgets
         search_box = Entry(password_manager_page, width=25, bd=0, fg='#7b7b7b', font=('Roboto Medium', 16), bg='#202022',insertbackground='#626262')
         search_button = Button(password_manager_page, bd=0, image=search_icon_image, activebackground='#1a1a1c', bg='#202022')
-        refresh_button = Button(password_manager_page,bd= 0,image = refresh_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
-        importButton =  Button(password_manager_page,bd= 0,image = import_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
-        exportButton =  Button(password_manager_page,bd= 0,image = export_icon_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        refresh_button = Button(password_manager_page,bd= 0,image = refresh_icon_image, activebackground='#202022', bg='#202022')
+        importButton =  Button(password_manager_page,bd= 0,image = import_icon_image, activebackground='#202022', bg='#202022')
+        exportButton =  Button(password_manager_page,bd= 0,image = export_icon_image, activebackground='#202022', bg='#202022')
         b1=  Button(password_manager_page,bd= 0,image = button_image, activebackground='#202022', bg='#202022')
         b2 =  Button(password_manager_page,bd= 0,image = update_button_image, activebackground='#202022', bg='#202022')
         b3=  Button(password_manager_page,bd= 0,image = delete_button_image , activebackground='#202022', bg='#202022')
         b4=  Button(password_manager_page,bd= 0,image = reset_button_image  , activebackground='#202022', bg='#202022')
         b5=  Button(password_manager_page,bd= 0,image = logout_button_image, activebackground='#202022', bg='#202022')
 
-        add_button=  Button(password_manager_page,bd= 0,image = add_data_new_image, activebackground='#1a1a1c', bg='#1a1a1c')
-
-        clear_button =  Button(password_manager_page,bd= 0,image = clear_field_image, activebackground='#1a1a1c', bg='#1a1a1c')
+        clear_button=  Button(password_manager_page,bd= 0,image = clear_field_image, activebackground='#202022', bg='#202022')
+        add_button =  Button(password_manager_page,bd= 0,image = add_data_new_image, activebackground='#202022', bg='#202022')
         generate_button_image_pro = PhotoImage(file = 'Manager/generate_button_image.png')
 
         # Griding the widgets
@@ -607,20 +608,17 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-        # adding elements to the treeview $ SQL
         def adding_data(e):
             global iid_val
             global added_sno
             conn = sqlite3.connect('password_data.db')
             c = conn.cursor()
 
-            # getting the input
             sno_inp = entr.get()
             website_name = entr1.get()
             username_inp = entr2.get()
             password_inp = entr3.get()
 
-            # Creating the db if not exists
             c.execute("""CREATE TABLE IF NOT EXISTS passwords (
             sno TEXT,
             website_name TEXT,
@@ -632,7 +630,6 @@ def login_button_pressed(e):
             c.execute(f"INSERT INTO passwords VALUES ('{sno_inp}','{website_name}','{username_inp}','{password_inp}')")
             iid_val += 1
 
-            # closing the connection between front-end and back-end
             conn.commit()
             conn.close()
 
@@ -710,29 +707,28 @@ def login_button_pressed(e):
 
         # export files to computer
         def export_Files(e):
-            files = [('Database File [Highly Encrypted]', '*.db')]
+            files = [('Max PC Safe Encrypted File', '*.ENX')]
             file = filedialog.asksaveasfile(filetypes=files,initialfile = 'password_data', defaultextension=files)
             old_directory = os.getcwd() + '\password_data.db'
             new_directory = file.name
             shutil.copyfile(src = old_directory,dst = new_directory)
-            messagebox.showinfo("Password Manager",'Your file has been exported successfully!')
+            messagebox.showinfo("Export successful",'Your passwords has been exported successfully!')
 
         # Move data into program
         def import_Files(e):
-            files = [('Database Files', '*.db')]
+            files = [('Max PC Safe Encrypted File', '*.ENX')]
             file = filedialog.askopenfile(filetypes=files,initialfile = 'red', defaultextension=files)
             old_directory = os.getcwd()
             new_directory = file.name # gets the file path
 
             shutil.copy(src = new_directory,dst = old_directory)
-            # remove the old file to avoid duplication
             os.remove('password_data.db')
 
             file_name = os.path.basename(new_directory)
+            messagebox.showinfo('Import successfull', 'Your passwords has been imported successfully, a restart is required to view changes ')
             new_window.destroy()
             os.startfile("main.pyw")
 
-            # Rename the imported file to password_data.db
             os.rename(file_name, 'password_data.db')
 
         def clear_data(e):
@@ -741,29 +737,21 @@ def login_button_pressed(e):
             entr2.delete(0,END)
             entr3.delete(0,END)
 
-        # search record :
-
         def search_records(e):
             lookup_record = search_box.get()
 
-            # Clear the Treeview
             for record in paz_tree.get_children():
                 paz_tree.delete(record)
 
-            # Create a database or connect to one that exists
             conn = sqlite3.connect('password_data.db')
 
-            # Create a cursor instance
             c = conn.cursor()
 
             c.execute('SELECT website_name, * FROM passwords WHERE website_name LIKE "%{}%"'.format(lookup_record))
             records = c.fetchall()
 
-            # Add our data to the screen
             global count
             count = 0
-
-            # for record in records:
 
             for record in records:
                 print(record)
@@ -776,28 +764,22 @@ def login_button_pressed(e):
                     paz_tree.insert(parent='', index='end', iid=count, text='',
                                    values=(record[1],record[0],record[3],record[4]),
                                    tags=('evenrow',))
-                    # increment counter
                 count += 1
 
-            # Commit changes
             conn.commit()
 
-            # Close our connection
             conn.close()
 
         def refresh_treeview_page(e):
-            # clearing the treeview
             for item in paz_tree.get_children():
                 paz_tree.delete(item)
 
-            # Printing data on rows and columns
             conn = sqlite3.connect("password_data.db")
             c = conn.cursor()
 
             c.execute("SELECT * FROM passwords")
             rows = c.fetchall()
 
-            # thsi code converts SQL data and shows into treeview
             for row in rows:
                 print(row)
                 paz_tree.insert("", END, values=row)
@@ -809,13 +791,21 @@ def login_button_pressed(e):
             conn.close()
 
 
-        # Delete data from squlite3 and Treeview
+        # --- Delete data from treeview and sqlite3 ---
         def delete_file(e):
-            pass # under work
-            # file = os.getcwd() + '\password_data.db'
-            # os.remove(file)
-            # messagebox.showwarning(" < Reset Successful > ",'Your database file has been erased, restart the software to flush the data ')
-            # new_window.destroy()
+
+            response = messagebox.askyesno('Confirmation',' Are you sure, you want to delete all your passwords? ')
+
+            if response == True:
+                os.remove(os.getcwd() + '\password_data.db')
+                for i in paz_tree.get_children():
+                    paz_tree.delete(i)
+                messagebox.showinfo('Reset Complete ',' All passwords have been wiped, a restart is required.')
+                new_window.destroy()
+                os.startfile('main.pyw')
+
+            if response == False:
+                pass
 
         paz_tree.bind('<Button-1>', selectItem)
         check_button1.bind('<Button-1>',button_clicked)
@@ -826,6 +816,7 @@ def login_button_pressed(e):
         refresh_button.bind("<Button>",refresh_treeview_page)
         importButton.bind("<Button>", import_Files)
         exportButton.bind("<Button>", export_Files)
+
 
         # Printing data on rows and columns
         conn = sqlite3.connect("password_data.db")
@@ -846,8 +837,88 @@ def login_button_pressed(e):
         conn.close()
         copy_password_button = Button(password_manager_page,bd= 0,image = copy_image, activebackground='#1a1a1c', bg='#1a1a1c')
 
+        def hover_on_add_button(e):
+            b1.config(image = hover_image_add_button)
+        def hover_realeased_add_button(e):
+            b1.config(image = button_image)
 
-        # gridding the widgets
+        def hover_on_update_button(e):
+            b2.config(image = hover_image_update_button)
+        def hover_realeased_update_button(e):
+            b2.config(image = update_button_image)
+
+        def hover_on_delete_button(e):
+            b3.config(image = hover_image_delete_button)
+        def hover_realeased_delete_button(e):
+            b3.config(image = delete_button_image)
+
+        def hover_on_reset_button(e):
+            b4.config(image = hover_image_reset_button)
+        def hover_realeased_reset_button(e):
+            b4.config(image = reset_button_image)
+
+        def hover_on_log_out_button(e):
+            b5.config(image = hover_image_log_out)
+        def hover_released_log_out_button(e):
+            b5.config(image = logout_button_image)
+
+        def hover_on_clear_field_button(e):
+            clear_button.config(image = hover_image_clearfields)
+        def hover_released_clear_field_button(e):
+            clear_button.config(image = clear_field_image )
+
+        def hover_on_add_hover_button(e):
+            add_button.config(image = hover_image_add_button_small)
+        def hover_released_hover_field_button(e):
+            add_button.config(image = add_data_new_image)
+
+        def hover_on_refresh_hover_button(e):
+            refresh_button.config(image = hover_on_refresh_image)
+        def hover_released_hover_refresh_button(e):
+            refresh_button.config(image = refresh_icon_image)
+
+        def hover_on_import_hover_button(e):
+            importButton.config(image = hover_on_import_image)
+        def hover_released_import_button(e):
+            importButton.config(image = import_icon_image)
+
+        def hover_on_export_hover_button(e):
+            exportButton.config(image = hover_on_export_image)
+        def hover_released_export_button(e):
+            exportButton.config(image = export_icon_image)
+
+        def hover_on_search_hover_button(e):
+            search_button.config(image = search_icon_image_hover)
+        def hover_released_search_button(e):
+            search_button.config(image = search_icon_image)
+
+        def hover_on_generate_hover_button(e):
+            generate_button.config(image = generate_button_image_hover)
+        def hover_released_generate__button(e):
+            generate_button.config(image = generate_button_image_pro)
+
+        def copy_on_hover(e):
+            copy_to_clip_button.config(image = copy_button_hover_image)
+        def copy_on_leave(e):
+            copy_to_clip_button.config(image = copy_image)
+
+        def copy_on_hover1(e):
+            copy_to_clip_button_1.config(image = copy_button_hover_image)
+        def copy_on_leave1(e):
+            copy_to_clip_button_1.config(image = copy_image)
+
+        def copy_on_hover2(e):
+            copy_to_clip_button_2.config(image = copy_button_hover_image)
+        def copy_on_leave2(e):
+            copy_to_clip_button_2.config(image = copy_image)
+
+        def copy_on_hover3(e):
+            copy_password_button.config(image = copy_button_hover_image)
+        def copy_on_leave3(e):
+            copy_password_button.config(image = copy_image)
+
+
+        # --- Gridding the widgets ---
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
         search_box.grid(row = 2,column = 84)
         search_button.grid(row = 2,column= 91)
@@ -863,8 +934,8 @@ def login_button_pressed(e):
         entr1.grid(row = 34,column = 11,columnspan = 70,rowspan = 60)
         entr2.grid(row = 48,column = 11,columnspan = 70,rowspan = 60)
         entr3.grid(row = 70,column = 11,columnspan = 70,rowspan = 70)
-        clear_button.grid(row = 90,column = 9,columnspan = 75,rowspan =100)
-        add_button.grid(row = 90,column = 10,columnspan = 75,rowspan =100)
+        add_button.grid(row = 90,column = 9,columnspan = 75,rowspan =100)
+        clear_button.grid(row = 90,column = 10,columnspan = 75,rowspan =100)
         copy_to_clip_button.grid(row = 34,column = 15,columnspan = 70,rowspan = 60)
         copy_to_clip_button_1.grid(row = 48,column = 15,columnspan = 70,rowspan = 60)
         copy_to_clip_button_2.grid(row = 70,column = 15,columnspan = 70,rowspan = 60)
@@ -882,6 +953,57 @@ def login_button_pressed(e):
         b2.bind('<Button>',update_data)
         b3.bind('<Button>',delete_data)
 
+        b1.bind('<Enter>',hover_on_add_button)
+        b1.bind('<Leave>',hover_realeased_add_button)
+
+        b2.bind('<Enter>',hover_on_update_button)
+        b2.bind('<Leave>',hover_realeased_update_button)
+
+        b3.bind('<Enter>',hover_on_delete_button)
+        b3.bind('<Leave>',hover_realeased_delete_button)
+
+        b4.bind('<Enter>',hover_on_reset_button)
+        b4.bind('<Leave>',hover_realeased_reset_button)
+        b4.bind("<Button>",delete_file)
+
+        b5.bind('<Enter>',hover_on_log_out_button)
+        b5.bind('<Leave>',hover_released_log_out_button)
+
+        clear_button.bind('<Enter>',hover_on_clear_field_button)
+        clear_button.bind('<Leave>',hover_released_clear_field_button)
+
+        add_button.bind('<Enter>',hover_on_add_hover_button)
+        add_button.bind('<Leave>',hover_released_hover_field_button)
+
+        refresh_button.bind('<Enter>',hover_on_refresh_hover_button)
+        refresh_button.bind('<Leave>',hover_released_hover_refresh_button)
+
+        importButton.bind('<Enter>',hover_on_import_hover_button)
+        importButton.bind('<Leave>',hover_released_import_button)
+
+        exportButton.bind('<Enter>',hover_on_export_hover_button)
+        exportButton.bind('<Leave>',hover_released_export_button)
+
+        search_button.bind('<Enter>',hover_on_search_hover_button)
+        search_button.bind('<Leave>',hover_released_search_button)
+
+        generate_button.bind('<Enter>',hover_on_generate_hover_button)
+        generate_button.bind('<Leave>',hover_released_generate__button)
+
+        copy_to_clip_button.bind('<Enter>',copy_on_hover)
+        copy_to_clip_button.bind('<Leave>',copy_on_leave)
+
+        copy_to_clip_button_1.bind('<Enter>',copy_on_hover1)
+        copy_to_clip_button_1.bind('<Leave>',copy_on_leave1)
+
+        copy_to_clip_button_2.bind('<Enter>',copy_on_hover2)
+        copy_to_clip_button_2.bind('<Leave>',copy_on_leave2)
+
+        copy_password_button.bind('<Enter>',copy_on_hover3)
+        copy_password_button.bind('<Leave>',copy_on_leave3)
+
+        clear_button.bind("<Button>",clear_Fields)
+
         new_window.mainloop()
 
     # --- condition if password was wrong  ---
@@ -892,17 +1014,18 @@ def login_button_pressed(e):
             messagebox.showerror('< Invalid Password - Program Terminated > ','You have entered the wrong password for more than 3 times.')
             window.destroy()
 
+
 def exit_applicaation(e):
     window.after(200,lambda:window.destroy())
 
-# Griding the widgets!
+
+# --- Gridding the widgets ---
 baground.grid(row=1, column=1, columnspan=100, rowspan=100)
 username_field.grid(row=37, column=78)
 password_field1.grid(row=48, column=78)
 password_field2.grid(row=58, column=78)
 sign_up_button.grid(row=52, column=31, columnspan=100, rowspan=100)
 exit_button_1.grid(row = 2,column = 100)
-
 
 def hover_over_sing_up_button(e):
     sign_up_button.config(image=sing_up_button_hover)
