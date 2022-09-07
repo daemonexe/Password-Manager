@@ -102,7 +102,6 @@ def button_Click(e):
     global invalid_counter
 
     if password_field2.get() == password_field1.get():
-
         if len(password_field2.get()) >= 8:
 
             conn = sqlite3.connect("sign_up.db")
@@ -122,10 +121,8 @@ def button_Click(e):
 
             conn.commit()
             conn.close()
-
         else:
             baground.config(image=less_characters_sign_up)
-
     else:
         baground.config(image = invalid_password_page)
 
@@ -269,6 +266,13 @@ def login_button_pressed(e):
             password_manager_page.clipboard_append(password_gen)
             password_manager_page.update()
 
+        def copy_generated_password(e):
+            password_gen = generated_password_Filed.get()
+            print(password_gen)
+            password_manager_page.clipboard_clear()
+            password_manager_page.clipboard_append(password_gen)
+            password_manager_page.update()
+
         # copy-to-clipboard
         copy_to_clip_button.bind("<Button>",copy_wbsite_name_to_clip_board)
         copy_to_clip_button_1.bind("<Button>",copy_username_name_to_clip_board)
@@ -312,7 +316,10 @@ def login_button_pressed(e):
 
         def generate_random_password(e):
 
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
+            turned_on = 'pyimage42'
+            turned_off = 'pyimage41'
+
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase + string.ascii_uppercase + string.digits + "!@#$%^&*()")
 
@@ -329,8 +336,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_off and check_button4['image'] == turned_off:
 
                 characters = list(string.ascii_uppercase)
 
@@ -347,7 +353,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27':
+            if check_button1['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_off:
 
                 characters = list(string.digits)
 
@@ -364,7 +370,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27':
+            if check_button1['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on and check_button4['image'] == turned_off:
 
                 characters = list('!@#$%^&*()')
 
@@ -381,8 +387,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
+            if check_button1['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase)
 
@@ -399,9 +404,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-
-            if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
+            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase + '!@#$%^&*()')
 
@@ -418,8 +421,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
+            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()')
 
@@ -436,7 +438,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27':
+            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_off:
 
                 characters = list(string.ascii_uppercase + string.digits)
 
@@ -453,7 +455,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage27':
+            if check_button1['image'] == turned_on and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_off:
 
                 characters = list(string.ascii_uppercase + string.ascii_lowercase)
 
@@ -470,8 +472,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27':
+            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off:
 
                 characters = list(string.ascii_lowercase + string.digits)
 
@@ -488,7 +489,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage27'and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28':
+            if check_button1['image'] == turned_off and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_on:
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
@@ -505,8 +506,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28'and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28':
+            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
                 characters = list(string.ascii_lowercase + '!@#$%^&*()' + string.digits)
 
                 random.shuffle(characters)
@@ -522,8 +522,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage27':
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_off:
 
                 characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
@@ -540,8 +539,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()' + string.digits)
 
@@ -558,8 +556,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage28' and check_button3['image'] == 'pyimage27' and check_button4['image'] == 'pyimage28':
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + string.digits)
 
@@ -576,8 +573,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-
-            if check_button1['image'] == 'pyimage28' and check_button2['image'] == 'pyimage27'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()')
 
@@ -594,7 +590,7 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == 'pyimage27' and check_button2['image'] == 'pyimage28'and check_button3['image'] == 'pyimage28' and check_button4['image'] == 'pyimage28':
+            if check_button1['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
 
                 characters = list(string.ascii_lowercase  + string.digits + '!@#$%^&*()')
 
@@ -610,7 +606,6 @@ def login_button_pressed(e):
 
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
-
 
         def adding_data(e):
             global iid_val
@@ -760,12 +755,6 @@ def login_button_pressed(e):
 
             os.rename(file_name, 'password_data.db')
 
-        def clear_data(e):
-            entr.delete(0,END)
-            entr1.delete(0,END)
-            entr2.delete(0,END)
-            entr3.delete(0,END)
-
         def search_records(e):
             lookup_record = search_box.get()
 
@@ -794,9 +783,7 @@ def login_button_pressed(e):
                                    values=(record[1],record[0],record[3],record[4]),
                                    tags=('evenrow',))
                 count += 1
-
             conn.commit()
-
             conn.close()
 
         def refresh_treeview_page(e):
@@ -818,7 +805,6 @@ def login_button_pressed(e):
 
             conn.commit()
             conn.close()
-
 
         # --- Delete data from treeview and sqlite3 ---
         def delete_file(e):
@@ -946,8 +932,6 @@ def login_button_pressed(e):
         def copy_on_leave3(e):
             copy_password_button.config(image = copy_image)
 
-
-
         # --- Gridding the widgets ---
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
         search_box.grid(row = 2,column = 84)
@@ -982,60 +966,44 @@ def login_button_pressed(e):
         b1.bind("<Button>",adding_data)
         b2.bind('<Button>',update_data)
         b3.bind('<Button>',delete_data)
-
         b1.bind('<Enter>',hover_on_add_button)
         b1.bind('<Leave>',hover_realeased_add_button)
-
         b2.bind('<Enter>',hover_on_update_button)
         b2.bind('<Leave>',hover_realeased_update_button)
-
         b3.bind('<Enter>',hover_on_delete_button)
         b3.bind('<Leave>',hover_realeased_delete_button)
-
         b4.bind('<Enter>',hover_on_reset_button)
         b4.bind('<Leave>',hover_realeased_reset_button)
         b4.bind("<Button>",delete_file)
-
         b5.bind('<Enter>',hover_on_log_out_button)
         b5.bind('<Leave>',hover_released_log_out_button)
-
         clear_button.bind('<Enter>',hover_on_clear_field_button)
         clear_button.bind('<Leave>',hover_released_clear_field_button)
-
         add_button.bind('<Enter>',hover_on_add_hover_button)
         add_button.bind('<Leave>',hover_released_hover_field_button)
-
         refresh_button.bind('<Enter>',hover_on_refresh_hover_button)
         refresh_button.bind('<Leave>',hover_released_hover_refresh_button)
-
         importButton.bind('<Enter>',hover_on_import_hover_button)
         importButton.bind('<Leave>',hover_released_import_button)
-
         exportButton.bind('<Enter>',hover_on_export_hover_button)
         exportButton.bind('<Leave>',hover_released_export_button)
-
         search_button.bind('<Enter>',hover_on_search_hover_button)
         search_button.bind('<Leave>',hover_released_search_button)
-
         generate_button.bind('<Enter>',hover_on_generate_hover_button)
         generate_button.bind('<Leave>',hover_released_generate__button)
-
+        generate_button.bind('<Button>',generate_random_password)
+        copy_password_button.bind('<Button>',copy_generated_password)
         copy_to_clip_button.bind('<Enter>',copy_on_hover)
         copy_to_clip_button.bind('<Leave>',copy_on_leave)
-
         copy_to_clip_button_1.bind('<Enter>',copy_on_hover1)
         copy_to_clip_button_1.bind('<Leave>',copy_on_leave1)
-
         copy_to_clip_button_2.bind('<Enter>',copy_on_hover2)
         copy_to_clip_button_2.bind('<Leave>',copy_on_leave2)
-
         copy_password_button.bind('<Enter>',copy_on_hover3)
         copy_password_button.bind('<Leave>',copy_on_leave3)
-
         clear_button.bind("<Button>",clear_Fields)
-
+        b5.bind("<Button>", exit_applicaation)
         add_button.bind("<Button>",adding_data)
-
         new_window.mainloop()
 
     # --- condition if password was wrong  ---
@@ -1046,10 +1014,8 @@ def login_button_pressed(e):
             messagebox.showerror('< Invalid Password - Program Terminated > ','You have entered the wrong password for more than 3 times.')
             window.destroy()
 
-
 def exit_applicaation(e):
     window.after(200,lambda:window.destroy())
-
 
 # --- Gridding the widgets ---
 baground.grid(row=1, column=1, columnspan=100, rowspan=100)
@@ -1088,7 +1054,6 @@ show_hide_button.grid(row = 54,column =72,columnspan = 100)
 log_in_button.grid(row = 65,column = 23,columnspan = 100)
 
 # hover animations
-
 def hover_over_sing_up_button(e):
     sign_up_button.config(image=sing_up_button_hover)
 
@@ -1096,14 +1061,13 @@ def leave_hover_over_sing_up_button(e):
     sign_up_button.config(image=sign_up_button_image)
 
 # Show hide functionality
-
 def change(e):
     global button_clicks1
     button_clicks1 += 1
+
     if button_clicks1 % 2 == 0:
         show_hide_button.config(image = eyes_open_icon)
         login_password_field1.config(show = '*')
-
     else:
         show_hide_button.config(image = eyes_closed_icon)
         login_password_field1.config(show = '')
@@ -1116,17 +1080,14 @@ def login_button_leave(e):
 
 # Binding the widgets
 log_in_button.bind('<Button>',login_button_pressed)
-
 log_in_button.bind('<Enter>',login_button_hover)
 log_in_button.bind('<Leave>',login_button_leave)
-
 sign_up_button.bind("<Button>",button_Click)
-exit_button_2.bind("<Button>",exit_applicaation)
 show_hide_button.bind('<Button>',change)
+
 # Check weather the user already has an account
 if os.path.isfile('sign_up.db'):
     switch_page(login_page)
-
 else:
     switch_page(sign_up_page)
 
