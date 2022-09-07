@@ -19,7 +19,7 @@ total_clicks1 = 0
 total_clicks2 = 0
 total_clicks3 = 0
 button_clicks1 = 0
-
+new_list = []
 # Creating all pages in the app
 sign_up_page = Frame(window)
 login_page = Frame(window)
@@ -71,6 +71,9 @@ button_image = PhotoImage(file='Manager/button_image_.png')
 copy_image = PhotoImage(file='Manager/copy_button_image.png')
 add_data_new_image = PhotoImage(file='Manager/add_database_image .png')
 clear_field_image = PhotoImage(file='Manager/clear_fields_image.png')
+empty_fields_password_manager = PhotoImage(file = 'Manager/manager_empty_fields.png')
+sno_error = PhotoImage(file = 'Manager/sno_error.png')
+login_hover_image = PhotoImage(file = 'Login/login_button_hover_animation.png')
 
 # Default Page
 switch_page(sign_up_page)
@@ -608,9 +611,12 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
+
         def adding_data(e):
             global iid_val
             global added_sno
+            global new_list
+
             conn = sqlite3.connect('password_data.db')
             c = conn.cursor()
 
@@ -619,19 +625,39 @@ def login_button_pressed(e):
             username_inp = entr2.get()
             password_inp = entr3.get()
 
-            c.execute("""CREATE TABLE IF NOT EXISTS passwords (
-            sno TEXT,
-            website_name TEXT,
-            username TEXT,
-            password TEXT
-            )""")
+            if sno_inp == '' or website_name == '' or username_inp == ''or password_inp == '':
+                messagebox.showerror(' Add Password ', 'Please specify all the required information while adding a password  ')
+                background.config(image = empty_fields_password_manager)
+            else:
+                c.execute('select sno from passwords;')
+                row = c.fetchall()
 
-            paz_tree.insert(iid=iid_val, index='end', parent='', values=(f'{sno_inp}', f'{website_name}', f'{username_inp}', f'{password_inp}'))
-            c.execute(f"INSERT INTO passwords VALUES ('{sno_inp}','{website_name}','{username_inp}','{password_inp}')")
-            iid_val += 1
+                for a in row:
+                    new_list.append(a[0])
 
-            conn.commit()
-            conn.close()
+                if sno_inp in new_list:
+                    background.config(image=sno_error)
+                else:
+                    background.config(image = manager_baground)
+
+                    c.execute("""CREATE TABLE IF NOT EXISTS passwords (
+                    sno TEXT,
+                    website_name TEXT,
+                    username TEXT,
+                    password TEXT
+                    )""")
+
+                    paz_tree.insert(iid=iid_val, index='end', parent='', values=(f'{sno_inp}', f'{website_name}', f'{username_inp}', f'{password_inp}'))
+                    c.execute(f"INSERT INTO passwords VALUES ('{sno_inp}','{website_name}','{username_inp}','{password_inp}')")
+                    iid_val += 1
+
+                    entr.delete(0, END)
+                    entr1.delete(0, END)
+                    entr2.delete(0, END)
+                    entr3.delete(0, END)
+
+                    conn.commit()
+                    conn.close()
 
         def update_data(e):
             conn = sqlite3.connect("password_data.db")
@@ -642,8 +668,6 @@ def login_button_pressed(e):
             passwords = entr3.get()
             print(sno,website_name,username,passwords)
 
-            c.execute("SELECT * FROM passwords")
-
             selected = paz_tree.focus()
             value = paz_tree.item(selected, 'values')
             sno_old = str(value[0])
@@ -653,6 +677,11 @@ def login_button_pressed(e):
             """)
 
             paz_tree.item(selected,text = '',values = (sno,website_name,username,passwords))
+
+            entr.delete(0,END)
+            entr1.delete(0,END)
+            entr2.delete(0,END)
+            entr3.delete(0,END)
 
             conn.commit()
             conn.close()
@@ -800,7 +829,7 @@ def login_button_pressed(e):
                 os.remove(os.getcwd() + '\password_data.db')
                 for i in paz_tree.get_children():
                     paz_tree.delete(i)
-                messagebox.showinfo('Reset Complete ',' All passwords have been wiped, a restart is required.')
+                messagebox.showinfo('Reset Complete ',' All passwords have been deleted, a restart is required.')
                 new_window.destroy()
                 os.startfile('main.pyw')
 
@@ -918,6 +947,7 @@ def login_button_pressed(e):
             copy_password_button.config(image = copy_image)
 
 
+
         # --- Gridding the widgets ---
         background.grid(row = 1,column = 1,columnspan = 100,rowspan = 100)
         search_box.grid(row = 2,column = 84)
@@ -1004,6 +1034,8 @@ def login_button_pressed(e):
 
         clear_button.bind("<Button>",clear_Fields)
 
+        add_button.bind("<Button>",adding_data)
+
         new_window.mainloop()
 
     # --- condition if password was wrong  ---
@@ -1076,8 +1108,18 @@ def change(e):
         show_hide_button.config(image = eyes_closed_icon)
         login_password_field1.config(show = '')
 
+def login_button_hover(e):
+    log_in_button.config(image = login_hover_image)
+
+def login_button_leave(e):
+    log_in_button.config(image = login_button_img)
+
 # Binding the widgets
 log_in_button.bind('<Button>',login_button_pressed)
+
+log_in_button.bind('<Enter>',login_button_hover)
+log_in_button.bind('<Leave>',login_button_leave)
+
 sign_up_button.bind("<Button>",button_Click)
 exit_button_2.bind("<Button>",exit_applicaation)
 show_hide_button.bind('<Button>',change)
