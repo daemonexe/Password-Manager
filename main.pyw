@@ -142,9 +142,8 @@ def login_button_pressed(e):
     c.execute("SELECT * FROM signup")
     for u in c.fetchall():
         print(u)
-
+    a = True
     if login_username_field.get() == u[0] and login_password_field1.get() == u[1]:
-
         window.withdraw()
 
         new_window = Toplevel()
@@ -183,8 +182,8 @@ def login_button_pressed(e):
         Style = ttk.Style()
         Style.theme_use('default')
         Style.configure("Treeview", background="#202022",borderwidth = 0,fieldbackground = '#202022',
-        foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Hack',15))
-        Style.configure("Treeview.Heading",borderwidth = 0,bd= 0, background="#202022", foreground="#989898",font = ('Hack',16))
+        foreground="#5d5d5f",rowheight = 45,highlightbackground ='red',bd= 0,highlightcolor = 'white',font = ('Arial',15))
+        Style.configure("Treeview.Heading",borderwidth = 0,bd= 0, background="#202022", foreground="#989898",font = ('Arial',14),)
         Style.map("Treeview",background = [('selected','#202022')],foreground = [('selected','#e4e4e4')])
         #styling rows
         paz_tree.column('#0',width = 0,minwidth = 0)
@@ -194,10 +193,10 @@ def login_button_pressed(e):
         paz_tree.column('password',width = 290,minwidth = 40,anchor = CENTER)
 
         # style headings
-        paz_tree.heading("sno",text = 'Sno')
-        paz_tree.heading("website_name",text = 'Website')
-        paz_tree.heading("username",text = 'Username')
-        paz_tree.heading("password",text = 'Password')
+        paz_tree.heading("sno",text = 'SNO')
+        paz_tree.heading("website_name",text = 'WEBSITE')
+        paz_tree.heading("username",text = 'USERNAME')
+        paz_tree.heading("password",text = 'PASSWORD')
         new_window.title('Password Manager')
         conn = sqlite3.connect('password_data.db')
         c = conn.cursor()
@@ -346,7 +345,7 @@ def login_button_pressed(e):
                 background.config(image=manager_baground)
 
                 characters = list(string.ascii_uppercase)
-
+                print('moba')
                 random.shuffle(characters)
                 password = []
 
@@ -363,8 +362,7 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_off:
 
                 background.config(image=manager_baground)
-                characters = list(string.digits)
-
+                characters = list(string.ascii_lowercase)
                 random.shuffle(characters)
                 password = []
 
@@ -381,8 +379,7 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on and check_button4['image'] == turned_off:
 
                 background.config(image=manager_baground)
-                characters = list('!@#$%^&*()')
-
+                characters = list(string.digits)
                 random.shuffle(characters)
                 password = []
 
@@ -395,18 +392,17 @@ def login_button_pressed(e):
 
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
+
 
             if check_button1['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase)
+                characters = list('!@#$%^&*()')
 
                 random.shuffle(characters)
                 password = []
-
                 for i in range(17):
                     password.append(random.choice(characters))
-
                 random.shuffle(password)
 
                 new_password = "".join(password)
@@ -414,47 +410,11 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
+
+            if check_button1['image'] == turned_off and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_on:
 
                 background.config(image=manager_baground)
                 characters = list(string.ascii_lowercase + '!@#$%^&*()')
-
-                random.shuffle(characters)
-                password = []
-
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_uppercase + '!@#$%^&*()')
-
-                random.shuffle(characters)
-                password = []
-
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_off:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_uppercase + string.digits)
-
                 random.shuffle(characters)
                 password = []
 
@@ -471,8 +431,10 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_on and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_off:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_uppercase + string.ascii_lowercase)
-
+                characters = list(string.ascii_uppercase + '!@#$%^&*()')
+                print(
+                'ass'
+                )
                 random.shuffle(characters)
                 password = []
 
@@ -486,11 +448,28 @@ def login_button_pressed(e):
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
 
-            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off:
+            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase + string.digits)
+                characters = list(string.ascii_uppercase + string.digits)
+                print('mo')
+                random.shuffle(characters)
+                password = []
 
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+            if check_button1['image'] == turned_on and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_off:
+
+                background.config(image=manager_baground)
+                characters = list(string.ascii_uppercase + string.ascii_lowercase)
                 random.shuffle(characters)
                 password = []
 
@@ -507,81 +486,9 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_off and check_button4['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_on:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
-
+                characters = list(string.ascii_lowercase + string.digits)
                 random.shuffle(characters)
-                password = []
 
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_off and check_button4['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase + '!@#$%^&*()' + string.digits)
-
-                random.shuffle(characters)
-                password = []
-
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_off:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
-
-                random.shuffle(characters)
-                password = []
-
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()' + string.digits)
-
-                random.shuffle(characters)
-                password = []
-
-                for i in range(17):
-                    password.append(random.choice(characters))
-
-                random.shuffle(password)
-
-                new_password = "".join(password)
-
-                generated_password_Filed.delete(0, END)
-                generated_password_Filed.insert(0, new_password)
-
-            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
-
-                background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase  + string.ascii_uppercase + string.digits)
-
-                random.shuffle(characters)
                 password = []
 
                 for i in range(17):
@@ -597,8 +504,7 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_on and check_button2['image'] == turned_off and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()')
-
+                characters = list(string.ascii_uppercase + '!@#$%^&*()' + string.digits)
                 random.shuffle(characters)
                 password = []
 
@@ -615,8 +521,8 @@ def login_button_pressed(e):
             if check_button1['image'] == turned_off and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
 
                 background.config(image=manager_baground)
-                characters = list(string.ascii_lowercase  + string.digits + '!@#$%^&*()')
-
+                characters = list(string.ascii_lowercase + '!@#$%^&*()' + string.digits)
+                print('sike')
                 random.shuffle(characters)
                 password = []
 
@@ -629,6 +535,77 @@ def login_button_pressed(e):
 
                 generated_password_Filed.delete(0, END)
                 generated_password_Filed.insert(0, new_password)
+
+
+
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
+
+                background.config(image=manager_baground)
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()' + string.digits)
+
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_on and check_button4['image'] == turned_off:
+
+                background.config(image=manager_baground)
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + string.digits)
+                random.shuffle(characters)
+                password = []
+
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+            if check_button1['image'] == turned_on and check_button2['image'] == turned_on and check_button3['image'] == turned_off and check_button4['image'] == turned_on:
+
+                background.config(image=manager_baground)
+                characters = list(string.ascii_lowercase  + string.ascii_uppercase + '!@#$%^&*()')
+
+                random.shuffle(characters)
+                password = []
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
+            if check_button1['image'] == turned_off and check_button2['image'] == turned_off and check_button3['image'] == turned_on and check_button4['image'] == turned_on:
+
+                background.config(image=manager_baground)
+                characters = list(string.digits + '!@#$%^&*()')
+
+                random.shuffle(characters)
+                password = []
+                for i in range(17):
+                    password.append(random.choice(characters))
+
+                random.shuffle(password)
+
+                new_password = "".join(password)
+
+                generated_password_Filed.delete(0, END)
+                generated_password_Filed.insert(0, new_password)
+
 
         def adding_data(e):
             global iid_val
@@ -778,7 +755,13 @@ def login_button_pressed(e):
             file_name = os.path.basename(new_directory)
             messagebox.showinfo('Import successfull', 'Your passwords has been imported successfully, a restart is required to view changes ')
             new_window.destroy()
-            os.startfile("main.pyw")
+
+            os.startfile("main.exe")
+
+            # if os.path.isfile('main.pyw'):
+            #     os.startfile("main.pyw")
+            # else:
+
 
             os.rename(file_name, 'password_data.db')
 
@@ -844,7 +827,7 @@ def login_button_pressed(e):
                     paz_tree.delete(i)
                 messagebox.showinfo('Reset Complete ',' All passwords have been deleted, a restart is required.')
                 new_window.destroy()
-                os.startfile('main.pyw')
+                os.startfile('main.exe')
 
             if response == False:
                 pass
@@ -965,11 +948,11 @@ def login_button_pressed(e):
         refresh_button.grid(row = 2,column = 81)
         importButton.grid(row = 2,column= 23,rowspan = 2)
         exportButton.grid(row = 2,column= 24,rowspan = 2)
-        b1.grid(row = 16,column = 10)
-        b2.grid(row = 18,column = 10)
-        b3.grid(row = 20,column = 10)
-        b4.grid(row = 22,column = 10)
-        b5.grid(row = 92,column = 10)
+        b1.grid(row = 22,column = 10)
+        b2.grid(row = 24,column = 10)
+        b3.grid(row = 26,column = 10)
+        b4.grid(row = 28,column = 10)
+        b5.grid(row = 91,column = 10)
         entr.grid(row = 34,column = 1,columnspan = 70,rowspan = 60)
         entr1.grid(row = 34,column = 11,columnspan = 70,rowspan = 60)
         entr2.grid(row = 48,column = 11,columnspan = 70,rowspan = 60)
@@ -1041,11 +1024,8 @@ def login_button_pressed(e):
             window.destroy()
 
 def exit_applicaation(e):
-    window.after(200,lambda:window.destroy())
-    print('haha')
+    window.after(1,lambda:window.destroy())
 
-def pop(e):
-    print('hai')
 
 # --- Gridding the widgets ---
 baground.grid(row=1, column=1, columnspan=100, rowspan=100)
