@@ -1063,6 +1063,7 @@ show_hide_button.grid(row = 54,column =72,columnspan = 100)
 log_in_button.grid(row = 65,column = 23,columnspan = 100)
 
 exit_button_2.bind('<Button>',exit_applicaation)
+exit_button_1.bind('<Button>',exit_applicaation)
 # hover animations
 def hover_over_sing_up_button(e):
     sign_up_button.config(image=sing_up_button_hover)
