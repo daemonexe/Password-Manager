@@ -27,10 +27,6 @@ This is software created to store passwords in our local drive/pc which uses SQL
 ## Optimizations
 
 The project included many optimizations, including storing passwords in a database file and reducing the image file size, as well as a slightly optimized password generator.
-## Demo
-
-Insert gif or link to demo
-
 
 ## FAQ
 
