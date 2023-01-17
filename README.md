@@ -41,7 +41,7 @@ A2 : Its MySqlite, a light version of SQL
 
 ## Installation
 
-Got to the latest releases and then dowload the zip file [latest_release](https://github.com/daemonexe)
+Got to the latest releases and then dowload the zip file [latest_release](https://github.com/daemonexe/password-Manager/releases/tag/v3.2.3)
 - unzip it and run the installer.exe
 - It's a installer.exe file jusst dowload it and click next, next....
 
