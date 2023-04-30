@@ -32,7 +32,7 @@ The project included many optimizations, including storing passwords in a databa
 
 #### Q1 : Will the passwords ever be compromised?
 
-A1 : The program is opne source the passwords are stored in your drive.
+A1 : The program is open source the passwords are stored in your drive.
 
 #### Q2 : What is the database used in this program
 
