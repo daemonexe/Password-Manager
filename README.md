@@ -6,6 +6,17 @@
 
 This is software created to store passwords in our local drive/pc which uses SQL technology to store, save, update, and delete data. Meanwhile, these passwords are secured by a master password which gives access to this volt. Fun Fact!; It's open source 
 
+## Screenshots
+## 2 Log in interface
+![App Screenshot](https://github.com/daemonexe/daemonexe/blob/main/Screenshot%202023-01-17%20133252.png?raw=true)
+## 
+## 3 Main interface
+![App Screenshot](https://github.com/daemonexe/daemonexe/blob/main/Screenshot%202023-01-17%20133138.png?raw=true)
+### 
+## Installation
+It's very straightforward just download the zip file form assets > extract it > run installer.exe....
+
+
 # Modules used 
 | module | function used     | Description                       |
 | :-------- | :------- | :-------------------------------- |
