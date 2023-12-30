@@ -3,14 +3,19 @@
 
 
 # Password Manager v3.2.3
+Introducing Password Manager, a user-friendly password manager coded with Python, dedicated to preserving users privacy and enhancing security. Unlike conventional password managers, Password Manager steers clear of cloud connections ensuring that your sensitive data stays securely on your personal computer with encrpytion. You can effortlessly import and export your encrypted password files as needed, providing flexibility without compromising on security. 
 
-This is software created to store passwords in our local drive/pc which uses SQL technology to store, save, update, and delete data. Meanwhile, these passwords are secured by a master password which gives access to this volt. Fun Fact!; It's open source 
+What sets Password Manager apart is its built-in password generator, simplifying the process of creating strong and unique passwords. With Password Manager, you maintain full control over your data, offering a reliable and user-centric solution for securely managing your passwords on your local machine.
+
+Lets take back control!!
 
 ## Screenshots
 ## 1 Log in interface
+It's very obvious just create admin username and password; you don't want people snooping your passwords when you are away 
 ![App Screenshot](https://github.com/daemonexe/daemonexe/blob/main/Screenshot%202023-01-17%20133252.png?raw=true)
 ## 
 ## 2 Main interface
+This interface displays all of your passwords
 ![App Screenshot](https://github.com/daemonexe/daemonexe/blob/main/Screenshot%202023-01-17%20133138.png?raw=true)
 ### 
 ## Installation
